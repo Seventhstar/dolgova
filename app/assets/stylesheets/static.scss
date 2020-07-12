@@ -1,0 +1,14 @@
+.about_card {
+  display: grid; grid-template-columns: 1fr 360px; 
+  background-color: white; 
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+  -webkit-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+}
+
+.social {display: grid; grid-template-columns: 150px 32px 32px; column-gap: 6px;}
+
+.about_text {padding: 20px;}
