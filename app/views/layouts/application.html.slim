@@ -9,23 +9,23 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'da.png'
   body
-    .header
-      .container
-        .h1
-          | Долгова Анастасия
-        .h2
-          | Психолог 
     .page-wrapper
       .page-content
+        .header
+          .container
+            .h1
+              | Долгова Анастасия
+            .h2
+              | Психолог 
         .container
-         h3
-          |Страница в разработке
-        = yield
+          h3
+            |Страница в разработке
+          = yield
 
-    .page-footer
-      .container 
-        .social
-          span Я в социальных сетях: 
-          = link_to image_tag('insta.png'), 'https://www.instagram.com/nastiadolgova/'
-          = link_to image_tag('vk.png'), 'https://vk.com/id3598181'
+      .page-footer
+        .container 
+          .social
+            span Я в социальных сетях: 
+            = link_to image_tag('insta.png'), 'https://www.instagram.com/nastiadolgova/'
+            = link_to image_tag('vk.png'), 'https://vk.com/id3598181'
 
