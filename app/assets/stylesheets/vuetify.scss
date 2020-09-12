@@ -1,0 +1,152 @@
+.v-btn {
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  flex: 0 0 auto;
+  font-weight: 500;
+  letter-spacing: .0892857143em;
+  justify-content: center;
+  outline: 0;
+  position: relative;
+  text-decoration: none;
+  text-indent: .0892857143em;
+  text-transform: uppercase;
+  transition-duration: .28s;
+  transition-property: box-shadow, transform, opacity;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-style: none;
+}
+
+.v-btn:before {
+  border-radius: inherit;
+  bottom: 0;
+  color: inherit;
+  content: "";
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity .2s cubic-bezier(.4, 0, .6, 1);
+  background-color: white;
+}
+
+.v-btn.v-size--default, .v-btn.v-size--large {
+  font-size: .875rem;
+}
+
+.v-btn:not(.v-btn--round).v-size--default {
+  height: 36px;
+  min-width: 64px;
+  padding: 0 16px;
+}
+
+.v-btn--rounded {
+  border-radius: 28px;
+}
+
+.v-btn--contained {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.theme--dark.v-btn {
+  color: #fff;
+}
+
+.spacer {
+  flex-grow: 1 !important;
+}
+
+.red {
+  background-color: #f44336 !important;
+  border-color: #f44336 !important;
+}
+
+.v-card {
+  border-width: thin;
+  display: block;
+  max-width: 100%;
+  outline: none;
+  text-decoration: none;
+  transition-property: box-shadow, opacity;
+  overflow-wrap: break-word;
+  position: relative;
+  white-space: normal;
+}
+
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.v-sheet.v-card {
+  border-radius: 4px;
+}
+
+.theme--light.v-card {
+  background-color: #fff;
+  color: rgba(0, 0, 0, .87);
+}
+
+.v-sheet:not(.v-sheet--outlined) {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, .2), 0 0 0 0 rgba(0, 0, 0, .14), 0 0 0 0 rgba(0, 0, 0, .12);
+}
+
+.theme--light.v-sheet {
+  background-color: #fff;
+  border-color: #fff;
+  color: rgba(0, 0, 0, .87);
+}
+
+[role=button], [type=button], [type=reset], [type=submit], button {
+  cursor: pointer;
+  color: inherit;
+}
+
+.v-btn__content {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  flex: 1 0 auto;
+  justify-content: inherit;
+  line-height: normal;
+  /* position: relative; */
+}
+
+.mr-2 {
+  margin-right: 8px !important;
+}
+.px-2 {
+  padding-right: 8px!important;
+  padding-left: 8px!important;
+}
+
+.theme--light.v-navigation-drawer .v-divider {
+  border-color: rgba(0, 0, 0, .12);
+}
+
+.theme--light.v-divider {
+  border-color: rgba(0, 0, 0, .12);
+}
+
+.v-divider {
+  display: block;
+  flex: 1 1;
+  max-width: 100%;
+  height: 0;
+  max-height: 0;
+  border: solid;
+  border-width: thin 0 0;
+  transition: inherit;
+}
+
+hr {
+  overflow: visible;
+  height: 0;
+}

@@ -1,0 +1,189 @@
+//$black: #000;
+//$white: #fff;
+//$shocking-pink: #aaa;
+//
+//html, body {
+//  width: 100%;
+//  height: 100%;
+//}
+//
+//body {
+//  font-family: Inconsolata, monospace;
+//  font-size: 24px;
+//  background-color: $black;
+//  display: grid;
+//  place-items: center;
+//}
+
+//.ti-btn {
+//  color: $white;
+//  font: inherit;
+//  background-color: $black;
+//  border: solid 4px $white;
+//  padding: 20px 30px;
+//  outline: 0;
+//  overflow: hidden;
+//  display: inline-block;
+//  position: relative;
+//  user-select: none;
+//  box-shadow: 0 0 0 0 rgba($white, 0.5);
+//  transition: box-shadow 150ms ease-out;
+//  &:focus {
+//    box-shadow: 0 0 0 8px rgba($white, 0.5);
+//  }
+//}
+
+//.v-ripple {
+//  background-color: white;
+//  width: 1rem;
+//  height: 1rem;
+//  position: absolute;
+//  border-radius: 50%;
+//  transform: translateX(-100%) translateY(-100%);
+//  mix-blend-mode: screen;
+//  animation: ripple 1250ms ease-out forwards, fade 1500ms ease-out forwards;
+//}
+//
+//@keyframes ripple {
+//  0% {
+//    transform: translate(-100%, -100%);
+//  }
+//  80% {
+//    transform: translate(-100%, -100%) scale(50);
+//  }
+//  100% {
+//    transform: translate(-100%, -100%) scale(50);
+//    opacity: 0;
+//  }
+//}
+//
+//@keyframes fade {
+//  0% {
+//    opacity: 1;
+//  }
+//  100% {
+//    opacity: 0;
+//  }
+//}
+//
+//.v-ripple__animation, .v-ripple__container {
+//  color: inherit;
+//  position: absolute;
+//  left: 0;
+//  top: 0;
+//  overflow: hidden;
+//  pointer-events: none;
+//}
+//
+//.v-ripple__container {
+//  border-radius: inherit;
+//  width: 100%;
+//  height: 100%;
+//  z-index: 0;
+//  contain: strict;
+//}
+//
+////element.style {
+////  width: 176.706px;
+////  height: 176.706px;
+////  transform: translate(-1.85299px, -70.353px) scale3d(1, 1, 1);
+////  opacity: 0;
+////}
+//.v-ripple__animation--out {
+//  transition: opacity .3s cubic-bezier(.4, 0, .2, 1);
+//}
+//
+//.v-ripple__animation--in {
+//  transition: transform .25s cubic-bezier(.4,0,.2,1),opacity .1s cubic-bezier(.4,0,.2,1);
+//}
+//
+//.v-ripple__animation {
+//  border-radius: 50%;
+//  background: currentColor;
+//  opacity: 0;
+//  will-change: transform, opacity;
+//}
+
+//.hover-ripple {
+//  position: absolute;
+//  background: #fff;
+//  border-radius: 50%;
+//  width: 5px;
+//  height: 5px;
+//  animation: rippleEffect 15.88s 100;
+//  opacity: 0;
+//}
+//
+//@keyframes rippleEffect {
+//  0% {
+//    transform: scale(1);
+//    opacity: 0.4;
+//  }
+//  100% {
+//    transform: scale(100);
+//    opacity: 0;
+//  }
+//}
+
+
+//// just for demo
+//a.ripple {
+//  position: relative;
+//  display: inline-block;
+//  padding: 12px 36px;
+//  margin: 10px 0;
+//  color: #fff;
+//  text-decoration: none;
+//  text-transform: uppercase;
+//  font-size: 18px;
+//  letter-spacing: 2px;
+//  border-radius: 40px;
+//  overflow: hidden;
+//  background: linear-gradient(90deg, #0162c8, #55e7fc);
+//}
+//
+//// ripple element
+//a.ripple > span {
+//  position: absolute;
+//  background: #fff;
+//  transform: translate(-50%, -50%);
+//  pointer-events: none;
+//  border-radius: 50%;
+//  animation: ripples 0.6s linear infinite;
+//}
+//
+//// ripple animation
+//@keyframes ripples {
+//0% {
+//width: 0px;
+//height: 0px;
+//opacity: 0.5;
+//}
+//100% {
+//width: 500px;
+//height: 500px;
+//opacity: 0;
+//}
+//}
+
+//.v-ripple {
+//  background-color: white;
+//  width: 1rem;
+//  height: 1rem;
+//  position: absolute;
+//  border-radius: 50%;
+//  transform: translateX(-100%) translateY(-100%);
+//  mix-blend-mode: screen;
+//  animation: ripple 1250ms ease-out forwards, fade 1500ms ease-out forwards;
+//}
+//
+//@keyframes ripple {
+//  0%   { transform: translate(-100%, -100%); }
+//  80%  { transform: translate(-100%, -100%) scale(50); }
+//  100% { transform: translate(-100%, -100%) scale(50); opacity: 0; }
+//}
+//
+//@keyframes fade {
+//  0%   { opacity: 1; }
+//  100% { opacity: 0; }
+//}

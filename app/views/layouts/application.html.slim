@@ -1,8 +1,12 @@
 doctype html
 html
   head
-    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" 
+    meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
     link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet"
+    link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap" rel="stylesheet"
+    link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet"
+    link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet"
+
     title Долгова Анастасия
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -11,21 +15,12 @@ html
   body
     .page-wrapper
       .page-content
-        .header
-          .container
-            .h1
-              | Долгова Анастасия
-            .h2
-              | Психолог 
+        = render "top_menu"
+
         .container
           h3
             |Страница в разработке
           = yield
-
-      .page-footer
-        .container 
-          .social
-            span Я в социальных сетях: 
-            = link_to image_tag('insta.png'), 'https://www.instagram.com/nastiadolgova/'
-            = link_to image_tag('vk.png'), 'https://vk.com/id3598181'
+          = render "social_menu"
+          = render "write_in"
 
