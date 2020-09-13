@@ -157,3 +157,14 @@ ul.nav {
     text-transform: uppercase;
 }
 
+#login a img {width: 32px}
+
+.right-toolbar {
+    display: grid;
+    grid-template-rows: 20px 1fr;
+}
+.login-info {
+    display: grid;
+    grid-template-columns: 1fr 16px 16px;
+    padding-top: 8px;
+}

@@ -6,5 +6,15 @@
       .h2
         | Психолог
     .spacer
-    .v-toolbar__items.hidden-xs-only
-      = render_navigation level: 1
+    .right-toolbar
+      .login-info
+        .user_name
+          = link_to current_user.name, admin_user_path(current_user)
+        .options
+        .login-icon
+          - if user_signed_in?
+            = link_to image_tag('logout.svg'), destroy_user_session_path
+          - else
+            = link_to image_tag('login.svg'), new_user_session_url
+      .v-toolbar__items.hidden-xs-only
+        = render_navigation level: 1
