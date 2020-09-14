@@ -89,6 +89,7 @@ button, input, optgroup, select, textarea {
 .v-toolbar {
     background-color: #ddb8cb;
     /*padding: 5px;*/
+    padding: 1px;
     height: 78px;
     box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
 }
@@ -105,7 +106,7 @@ button, input, optgroup, select, textarea {
 .v-toolbar__items {
     display: flex;
     margin: 0;
-    height: 78px;
+    height: 48px;
 }
 
 .v-toolbar__content .header {
@@ -139,9 +140,12 @@ ul.nav {
     float: left;
 }
 
+.nav li.selected {
+    background-color: #c78aad;
+}
+
 .nav li:hover {
-    opacity: .08;
-    background-color: #fff;
+    background-color: #c78aad;
 }
 
 .nav li a {
@@ -152,7 +156,6 @@ ul.nav {
     letter-spacing: .0892857143em;
     outline: 0;
     position: relative;
-    text-decoration: none;
     text-indent: .0892857143em;
     text-transform: uppercase;
 }
@@ -162,9 +165,27 @@ ul.nav {
 .right-toolbar {
     display: grid;
     grid-template-rows: 20px 1fr;
+    grid-row-gap: 8px;
 }
 .login-info {
     display: grid;
     grid-template-columns: 1fr 16px 16px;
-    padding-top: 8px;
+    grid-column-gap: 8px;
+    padding-top: 4px;
+    line-height: 1;
+    text-align: end;
+
+}
+.login-info img {height: 16px;}
+.user_name {padding-top: 2px;}
+
+.v-toolbar a, .v-toolbar a:link, .v-toolbar a:visited {
+    color: white;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .875rem;
+    letter-spacing: .1em;
+    font-weight: 500;
+    text-indent: 0.1em;
 }

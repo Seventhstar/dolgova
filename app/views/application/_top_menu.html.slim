@@ -9,8 +9,9 @@
     .right-toolbar
       .login-info
         .user_name
-          = link_to current_user.name, admin_user_path(current_user)
+          = link_to current_user.name, admin_user_path(current_user) if user_signed_in?
         .options
+          = link_to image_tag('settings.svg'), admin_root_path if is_admin?
         .login-icon
           - if user_signed_in?
             = link_to image_tag('logout.svg'), destroy_user_session_path

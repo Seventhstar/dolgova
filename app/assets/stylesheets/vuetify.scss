@@ -11,32 +11,32 @@
   text-decoration: none;
   text-indent: .0892857143em;
   text-transform: uppercase;
-  transition-duration: .28s;
-  transition-property: box-shadow, transform, opacity;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  //transition-duration: .28s;
+  //transition-property: box-shadow, transform, opacity;
+  //transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  //-webkit-user-select: none;
+  //-moz-user-select: none;
+  //-ms-user-select: none;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
   border-style: none;
 }
 
-.v-btn:before {
-  border-radius: inherit;
-  bottom: 0;
-  color: inherit;
-  content: "";
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transition: opacity .2s cubic-bezier(.4, 0, .6, 1);
-  background-color: white;
-}
+//.v-btn:before {
+//  border-radius: inherit;
+//  bottom: 0;
+//  color: inherit;
+//  content: "";
+//  left: 0;
+//  opacity: 0;
+//  pointer-events: none;
+//  position: absolute;
+//  right: 0;
+//  top: 0;
+//  transition: opacity .2s cubic-bezier(.4, 0, .6, 1);
+//  background-color: white;
+//}
 
 .v-btn.v-size--default, .v-btn.v-size--large {
   font-size: .875rem;
@@ -67,6 +67,8 @@
 .red {
   background-color: #f44336 !important;
   border-color: #f44336 !important;
+  background-image: none !important;
+  text-shadow: none !important;
 }
 
 .v-card {
