@@ -10,13 +10,13 @@ if User.count == 0
   User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') 
 end
 
-#if StateColor.count == 0
-#  StateColor.create!([
-#                         {name: 'Emerald green', color: '2dcd87'},
-#                         {name: 'French Rose', color: 'ef608c'},
-#                         {name: 'Coral pink', color: 'f98077'},
-#                         {name: 'Soft Violet', color: 'b18cda'}])
-#end
+if StateColor.count == 0
+  StateColor.create!([
+                         {name: 'Emerald green', color: '2dcd87'},
+                         {name: 'French Rose', color: 'ef608c'},
+                         {name: 'Coral pink', color: 'f98077'},
+                         {name: 'Soft Violet', color: 'b18cda'}])
+end
 #
 #if Duration.count == 0
 #  Duration.create!([{name: '1ч', minutes: '60'},
