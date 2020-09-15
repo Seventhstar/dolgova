@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if User.count == 0
-  User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+  User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') 
 end
 
 #if StateColor.count == 0
