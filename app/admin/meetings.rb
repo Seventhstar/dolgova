@@ -1,5 +1,4 @@
 ActiveAdmin.register Meeting do
-
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -9,10 +8,10 @@ ActiveAdmin.register Meeting do
   #
   # or
   #
-  # permit_params do
-  #   permitted = [:name, :format_id, :duration_id]
+  permit_params do
+    permitted = [:name, :format_id, :duration_id]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+    permitted
+  end
   
 end
