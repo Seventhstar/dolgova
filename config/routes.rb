@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :formats, ActiveAdmin::Devise.config
   get 'schedule/index'
   ActiveAdmin.routes(self)
   devise_for :users, ActiveAdmin::Devise.config
