@@ -26,4 +26,4 @@ if Format.count == 0
   Format.create!([{name: 'Очно', online: false},
                   {name: 'Онлайн', online: true},
                   {name: 'Skype', online: true}])
-endFormat.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+end
