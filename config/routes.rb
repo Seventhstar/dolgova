@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'schedule/index'
   ActiveAdmin.routes(self)
   devise_for :users, ActiveAdmin::Devise.config
   get 'static/index'

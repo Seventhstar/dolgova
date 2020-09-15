@@ -1,0 +1,42 @@
+// Place all the styles related to the schedule controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#schedule-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #ddb8cb;
+  height: 32px;
+  align-content: center;
+
+  span {
+    color: white;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: .875rem;
+    letter-spacing: .1em;
+    font-weight: 500;
+    text-indent: 0.1em;
+    text-align: center;
+    display: inherit;
+    align-items: center;
+    height: 32px;
+    cursor: pointer;
+  }
+}
+
+.schedule_head {
+  display: block;
+  height: 52px;
+}
+
+.schedule_head .h2 {
+  float: left;
+  font-size: 2em;
+  margin-bottom: 0.75em;
+}
+
+.schedule_head .add_task {
+  float: right
+}

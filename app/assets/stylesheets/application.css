@@ -122,9 +122,9 @@ ul.nav {
 }
 
 .nav li {
-    height: 36px;
+    /*height: 36px;*/
     min-width: 64px;
-    padding: 0 16px;
+    /*padding: 0 16px;*/
 
     border-radius: 0;
     height: 100% !important;
@@ -140,7 +140,7 @@ ul.nav {
     float: left;
 }
 
-.nav li.selected {
+.nav li.selected, #schedule-tabs .active {
     background-color: #c78aad;
 }
 
@@ -153,10 +153,10 @@ ul.nav {
     text-decoration: none;
     font-size: .875rem;
     font-weight: 500;
-    letter-spacing: .0892857143em;
+    letter-spacing: .09em;
     outline: 0;
     position: relative;
-    text-indent: .0892857143em;
+    text-indent: .09em;
     text-transform: uppercase;
 }
 
@@ -178,6 +178,13 @@ ul.nav {
 }
 .login-info img {height: 16px;}
 .user_name {padding-top: 2px;}
+
+.v-toolbar li a {
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    padding: 28px 16px 0 16px;
+}
 
 .v-toolbar a, .v-toolbar a:link, .v-toolbar a:visited {
     color: white;

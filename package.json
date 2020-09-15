@@ -3,9 +3,14 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "4.3.0",
-    "vue": "^2.6.12"
+    "axios": "^0.20.0",
+    "rails-erb-loader": "^5.5.2",
+    "vue": "^2.6.12",
+    "vue-select": "^3.10.8"
   },
   "devDependencies": {
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12",
     "webpack-dev-server": "^3.11.0"
   }
 }
