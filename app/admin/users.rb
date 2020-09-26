@@ -24,7 +24,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :name
       f.input :phone
-      f.input :tarif_id, as: :select, collection: Tarif.all.map{|t| ["#{t.name} (#{t.amount})", t.id]}
+      f.input :tarif, as: :select, collection: Tarif.all.map{|t| ["#{t.name} (#{t.amount})", t.id]}
       f.input :admin, as: :boolean
       f.input :password if f.object.new_record?
       f.input :password_confirmation if f.object.new_record?
