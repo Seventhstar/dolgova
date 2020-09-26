@@ -1,11 +1,12 @@
 // Place all the styles related to the schedule controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "common.scss";
 
 #schedule-tabs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background-color: #ddb8cb;
+  background-color: $head-color;
   height: 32px;
   align-content: center;
 
