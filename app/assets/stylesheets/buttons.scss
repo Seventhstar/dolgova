@@ -33,7 +33,8 @@
 .btn-cancel, .btn_reset {
   color: black;
   background-color: #eee;
-  border-color: #a76d8e;
+  //border-color: #a76d8e;
+  border-color: #aaa;
 
   &:hover, &:focus {
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f8f8), to(#dcd7d7));

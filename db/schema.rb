@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_093755) do
+ActiveRecord::Schema.define(version: 2020_09_20_192310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,26 @@ ActiveRecord::Schema.define(version: 2020_09_15_093755) do
     t.integer "minutes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "event_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "event_type_id", null: false
+    t.text "comment"
+    t.date "date"
+    t.time "time_from"
+    t.time "time_to"
+    t.integer "linked_user_id"
+    t.boolean "online"
+    t.integer "meeting_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_type_id"], name: "index_events_on_event_type_id"
   end
 
   create_table "formats", force: :cascade do |t|
@@ -87,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_093755) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "event_types"
   add_foreign_key "meetings", "durations"
   add_foreign_key "meetings", "formats"
 end

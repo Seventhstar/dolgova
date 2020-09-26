@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 if User.count == 0
-  User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') 
+  User.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
 end
 
 if StateColor.count == 0
@@ -16,6 +16,13 @@ if StateColor.count == 0
                          {name: 'French Rose', color: 'ef608c'},
                          {name: 'Coral pink', color: 'f98077'},
                          {name: 'Soft Violet', color: 'b18cda'}])
+end
+
+if EventType.count == 0
+  EventType.create([
+                       {name: 'Доступно для консультаций'},
+                       {name: 'Консультация'},
+                       {name: 'Личное дело'}])
 end
 #
 #if Duration.count == 0

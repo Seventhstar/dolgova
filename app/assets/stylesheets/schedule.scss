@@ -41,3 +41,21 @@
   float: right;
   cursor: pointer;
 }
+
+.vdatetime {
+  float: left
+}
+
+.vdatetime input {
+  border: 1px solid rgba(60, 60, 60, .26);
+  padding: 4px 8px;
+  border-radius: 3px;
+}
+
+.vdatetime.date input {
+  width: 108px;
+}
+
+.vdatetime.time input {
+  width: 36px;
+}

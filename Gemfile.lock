@@ -303,6 +303,7 @@ DEPENDENCIES
   pg
   puma (~> 3.7)
   rails (~> 6.0.3, >= 6.0.3.2)
+  responders
   rspec-rails (~> 4.0.1)
   sass-rails (~> 5.0)
   selenium-webdriver

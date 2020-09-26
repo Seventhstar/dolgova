@@ -1,4 +1,6 @@
 = javascript_pack_tag 'application'
 = javascript_pack_tag 'schedule'
-a
+= content_tag :div, id: 'event-data',
+        data: { eventTypes: for_js(EventType.all)} do
+
 #schedule_app

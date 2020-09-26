@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get 'static/index'
   root to: "static#index"
+  resource :events
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
