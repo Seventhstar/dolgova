@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :name, :phone, :password_confirmation, :admin
+  permit_params :email, :password, :name, :phone, :password_confirmation, :admin, :tarif_id
 
   index do
     selectable_column
@@ -9,6 +9,7 @@ ActiveAdmin.register User do
     column :phone
     column :current_sign_in_at
     column :sign_in_count
+    column :tarif
     column :created_at
     actions
   end
@@ -23,9 +24,10 @@ ActiveAdmin.register User do
       f.input :email
       f.input :name
       f.input :phone
+      f.input :tarif_id, as: :select, collection: Tarif.all.map{|t| ["#{t.name} (#{t.amount})", t.id]}
       f.input :admin, as: :boolean
-      f.input :password
-      f.input :password_confirmation
+      f.input :password if f.object.new_record?
+      f.input :password_confirmation if f.object.new_record?
     end
     f.actions
   end
