@@ -8,14 +8,15 @@
     <EventForm v-model="currentEvent" @input="onInput($event)" v-show="showModal"/>
     <div id="event-list">
       <div class="event_row" v-for="event in events" @dblclick="editEvent(event)">
-        <span :style="{'background-color': event.color}"></span>
         <div class="event-list-item">
           <span>{{formatTime(event.time_from)}}</span>
+          <span :style="{ 'background-color': '#'+event.color }" class="color-column"></span>
           <span>{{event.linked_user_name}}</span>
           <span>{{event.meeting_name}}</span>
           <span>баланс</span>
 
           <span class="second_row">{{formatTime(event.time_to)}}</span>
+          <span :style="{ 'background-color': '#'+event.color }" class="color-column"></span>
           <span class="second_row">{{event.linked_user_phone}}</span>
           <span class="second_row">{{event.comment}}</span>
           <span class="second_row">{{event.tarif_info}}</span>

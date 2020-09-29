@@ -12,6 +12,10 @@ class Event < ApplicationRecord
     self.linked_user&.phone
   end
 
+  def color
+    self.event_type&.state_color&.color
+  end
+
   def meeting_name
     self.meeting&.name
   end

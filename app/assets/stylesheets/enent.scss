@@ -7,13 +7,13 @@
 
 .event-list-item {
   display: grid;
-  grid-template-columns: 60px 1fr 1fr 90px;
+  grid-template-columns: 50px 24px 1fr 1fr 90px;
 }
 
 .event_row {
   display: grid;
   background-color: white;
-  grid-template-columns: 8px 1fr 38px;
+  grid-template-columns: 1fr 38px;
   align-content: center;
   margin: 10px 0;
   padding: 10px;
@@ -24,4 +24,8 @@
 .second_row {
   font-size: 14px;
   color: gray;
+}
+
+.color-column {
+  margin-right: 14px;
 }
