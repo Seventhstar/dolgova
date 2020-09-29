@@ -15,3 +15,14 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+.vs__clear, .vs__clear:hover{
+  border: none !important;
+  background: none !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.vs__dropdown-option--highlight {
+  background-color: $active-btn;
+  color: white;
+}
