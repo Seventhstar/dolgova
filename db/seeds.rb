@@ -34,4 +34,4 @@ end
 #  Format.create!([{name: 'Очно', online: false},
 #                  {name: 'Онлайн', online: true},
 #                  {name: 'Skype', online: true}])
-#end
+#endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

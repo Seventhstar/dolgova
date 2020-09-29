@@ -1,4 +1,5 @@
 ActiveAdmin.register Meeting do
+  menu label: "Вид консультации"
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #

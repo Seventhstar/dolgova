@@ -4,19 +4,19 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Анастасия Долгова"
+  config.site_title = "Dolgova"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  config.site_title_link = "/"
+  # config.site_title_link = "/"
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
   #
   # Note: Aim for an image that's 21px high so it fits in the header.
   #
-  config.site_title_image = "logo.jpg"
+  # config.site_title_image = "logo.png"
 
   # == Default Namespace
   #
@@ -39,9 +39,9 @@ ActiveAdmin.setup do |config|
   # a namespace block. For example, to change the site title
   # within a namespace:
   #
-     config.namespace :admin do |admin|
-       admin.site_title = "Custom Admin Title"
-     end
+  #   config.namespace :admin do |admin|
+  #     admin.site_title = "Custom Admin Title"
+  #   end
   #
   # This will ONLY change the title for the admin section. Other
   # namespaces will continue to use the main "site_title" configuration.
@@ -54,7 +54,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-  config.authentication_method = :authenticate_user!
+  config.authentication_method = :authenticate_admin_user!
 
   # == User Authorization
   #
@@ -91,7 +91,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  config.current_user_method = :current_user
+  config.current_user_method = :current_admin_user
 
   # == Logging Out
   #
@@ -103,7 +103,7 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_user_session_path
+  config.logout_link_path = :destroy_admin_user_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
@@ -117,7 +117,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-  # config.root_to = 'static#index'
+  # config.root_to = 'dashboard#index'
 
   # == Admin Comments
   #
@@ -172,7 +172,7 @@ ActiveAdmin.setup do |config|
 
   # == Setting a Favicon
   #
-  config.favicon = 'da.png'
+  # config.favicon = 'favicon.ico'
 
   # == Meta Tags
   #
@@ -294,7 +294,7 @@ ActiveAdmin.setup do |config|
   # config.include_default_association_filters = true
 
   # config.maximum_association_filter_arity = 256 # default value of :unlimited will change to 256 in a future version
-  # config.filter_columns_for_large_association, [
+  # config.filter_columns_for_large_association = [
   #    :display_name,
   #    :full_name,
   #    :name,
@@ -303,7 +303,7 @@ ActiveAdmin.setup do |config|
   #    :title,
   #    :email,
   #  ]
-  # config.filter_method_for_large_association, '_starts_with'
+  # config.filter_method_for_large_association = '_starts_with'
 
   # == Head
   #
@@ -325,4 +325,11 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+
+  # == Webpacker
+  #
+  # By default, Active Admin uses Sprocket's asset pipeline.
+  # You can switch to using Webpacker here.
+  #
+  # config.use_webpacker = true
 end

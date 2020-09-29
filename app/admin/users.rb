@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
   permit_params :email, :password, :name, :phone, :password_confirmation, :admin, :tarif_id
+  menu label: "Пользователи"
 
   index do
     selectable_column
