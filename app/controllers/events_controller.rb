@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-
+  before_action :load_event, only: [:show, :destroy, :edit, :update]
   respond_to :json
 
   def index
@@ -9,19 +9,12 @@ class EventsController < ApplicationController
   end
 
   def create
-    respond_with(@event = Event.create(event_params))
-    # puts "@event.present? #{@event.present?}"
-    # puts "@event.errors.full_messages #{@event.errors.full_messages}"
-    #
-    # if @event.errors.any?
-    #   respond_with(@event.errors.full_messages)
-    # else
-    #   respond_with(@event, location: nil)
-    # end
-    # puts @event.errors.full_messages
+    respond_with(@event = Event.create(event_params), location: nil)
   end
 
   def update
+    @event.update(event_params)
+    respond_with(@event)
   end
 
   private
@@ -31,6 +24,11 @@ class EventsController < ApplicationController
                                   :event_type_id, :comment, :id,
                                   :linked_user_id, :online, :meeting_id)
   end
+
+  def load_event
+    @event = Event.find(params[:id])
+  end
+
 
 
 end

@@ -1,0 +1,1 @@
+json.extract! @event, :id, :time_from, :time_to, :event_type_id, :comment, :linked_user_id, :online, :meeting_id, :linked_user_name, :linked_user_phone, :meeting_name, :tarif_info

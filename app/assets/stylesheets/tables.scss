@@ -14,17 +14,6 @@
 .date-times {
   display: grid;
   grid-template-columns: 126px 6px 54px 14px 54px;
-
   grid-gap: 10px;
   align-items: center;
-}
-
-.event-list-item {
-  display: grid;
-  grid-template-columns: 8px 60px 1fr 1fr 30px;
-  background-color: white;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
 }

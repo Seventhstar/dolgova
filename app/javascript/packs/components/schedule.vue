@@ -2,22 +2,32 @@
   <div>
     <div class="schedule_head">
       <div class="h2">Расписание</div>
-      <div class="add_task v-btn theme--dark v-size--default red ripple" @click="showModal=true">Добавить</div>
+      <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click="onAdd()">Добавить</div>
     </div>
     <ScheduleTabs/>
-    <EventForm v-model="showModal" @input="onInput($event)"/>
+    <EventForm v-model="currentEvent" @input="onInput($event)" v-show="showModal"/>
     <div id="event-list">
-      <div v-for="event in events" class="event-list-item">
+      <div class="event_row" v-for="event in events" @dblclick="editEvent(event)">
         <span :style="{'background-color': event.color}"></span>
-        <span>{{event.time_from}}</span>
-        <span>{{event.linked_user_name}}</span>
-        <span>{{event.event_type_name}}</span>
-        <template v-if="event.online">
-          <span class="online"></span>
-        </template>
-        <template v-else>
-          <span class="sofa"></span>
-        </template>
+        <div class="event-list-item">
+          <span>{{formatTime(event.time_from)}}</span>
+          <span>{{event.linked_user_name}}</span>
+          <span>{{event.meeting_name}}</span>
+          <span>баланс</span>
+
+          <span class="second_row">{{formatTime(event.time_to)}}</span>
+          <span class="second_row">{{event.linked_user_phone}}</span>
+          <span class="second_row">{{event.comment}}</span>
+          <span class="second_row">{{event.tarif_info}}</span>
+        </div>
+        <span class="event_icon">
+            <template v-if="event.online">
+              <span class="online"></span>
+            </template>
+            <template v-else>
+              <span class="sofa"></span>
+            </template>
+          </span>
       </div>
     </div>
   </div>
@@ -37,46 +47,53 @@
         token: '',
         target: null,
         showModal: false,
+        currentEvent: {},
         sets_names: [],
         parents: [],
         groups: [],
-        events: [{
-          date: '2020.09.20',
-          time_from: '10:00',
-          event_type_name: 'Индивидуальная консультация',
-          online: true,
-          linked_user_name: 'Татьяна',
-          color: 'ef608c',
-          icon: 'online'
-        },
-          {
-            date: '2020.09.20',
-            time_from: '11:15',
-            event_type_name: 'Индивидуальная консультация',
-            online: true,
-            linked_user_name: 'Николай',
-            color: 'ef608c',
-            icon: 'online'
-          },
-          {
-            date: '2020.09.20',
-            time_from: '14:00',
-            event_type_name: 'Семейная консультация',
-            online: false,
-            linked_user_name: 'Саша + Маша',
-            color: '2dcd87',
-            icon: 'sofa'
-          },
-        ],
+        events: [],
         count_names: []
+      }
+    },
+
+    created() {
+      let element = document.getElementById('event-data')
+      if (element !== null) {
+        this.events = JSON.parse(element.dataset.events)
       }
     },
 
     methods: {
       onInput(e) {
         this.showModal = false
-        console.log(e)
+        if (e === undefined) return
+        if (!e.update) {
+          this.events.push(e.data)
+        } else {
+          let id = e.data.id
+          let forUpdate = this.events.filter(e => e.id === id)
+          if (forUpdate.length > 0) {
+            let i = this.events.indexOf(forUpdate[0])
+            console.log('forUpdate', forUpdate, i)
+            this.$set(this.events, i, e.data)
+          }
 
+        }
+        console.log('onInput', e)
+      },
+
+      onAdd() {
+        this.showModal = true
+        this.currentEvent = null
+      },
+
+      editEvent(event) {
+        this.currentEvent = event
+        this.showModal = true
+      },
+
+      formatTime(str) {
+        return formatTime(str)
       }
     },
 

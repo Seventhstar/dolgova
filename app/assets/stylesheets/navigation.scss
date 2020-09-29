@@ -57,8 +57,7 @@
 }
 
 .v-toolbar {
-  background-color: $head-color-dark;
-  /*padding: 5px;*/
+  background-color: $head-color;
   padding: 1px;
   height: 78px;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, .2), 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12);
@@ -111,11 +110,11 @@ ul.nav {
 }
 
 .nav li.selected, #schedule-tabs .active {
-  background-color: #c78aad;
+  background-color: $active-btn;
 }
 
 .nav li:hover {
-  background-color: #c78aad;
+  background-color: $active-btn;
 }
 
 .nav li a {

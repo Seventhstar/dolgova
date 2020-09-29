@@ -23,10 +23,10 @@
 .modal-head {
   background-color: $head-color-dark;
   color: #fff;
-  padding: 10px 20px;
+  padding: 16px 20px;
   border-radius: 2px 2px 0 0;
   border-bottom: 1px solid white;
-  //box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.2), 0 0px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  font-size: 18px;
 }
 
 .modal-body {
@@ -80,7 +80,7 @@
 }
 
 .vdatetime-popup__actions__button:hover {
-  background-color: #f7eff0;
+  background-color: $active-hover;
 }
 
 .vdatetime-popup__actions {

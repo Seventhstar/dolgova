@@ -15,4 +15,9 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
+// console.log('Hello World from Webpacker')
+
+window.formatTime = function (str) {
+  if (str === null) return ''
+  return new Date(str).toString().slice(16, 21)
+}

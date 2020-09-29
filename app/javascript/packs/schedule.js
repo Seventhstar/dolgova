@@ -29,12 +29,12 @@ function showSchedule() {
   console.log('schedule app', app)
 }
 
-console.log('js')
+// console.log('js')
 
-// document.addEventListener('pageshow turbolinks:load',function() {
-// //Your code
-//   console.log('turbolinks:load 2')
-// });
+document.addEventListener('pageshow turbolinks:load',function() {
+//Your code
+  console.log('turbolinks:load 2')
+});
 //
 // document.addEventListener('turbolinks:load', () => {
 //   showSchedule();
@@ -45,10 +45,3 @@ document.addEventListener('DOMContentLoaded', () => {
   showSchedule();
   console.log('DOMContentLoaded')
 })
-
-if (document.readyState === "interactive") {
-  console.log('document.readyState')
-  const event = document.createEvent("Event");
-  event.initEvent("turbolinks:load", true, true);
-  document.dispatchEvent(event);
-}

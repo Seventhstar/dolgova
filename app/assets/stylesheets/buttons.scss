@@ -1,15 +1,16 @@
+@import "common.scss";
+
 .btn {
   display: inline-block;
   margin-bottom: 0;
-  font-weight: normal;
   text-align: center;
   vertical-align: middle;
   touch-action: manipulation;
   cursor: pointer;
   background-image: none;
-  border: 1px solid transparent;
+  border: none;
   white-space: nowrap;
-  padding: 3px 12px;
+  padding: 8px 14px !important;
   font-size: 14px;
   line-height: 1.42857143;
   border-radius: 4px;
@@ -17,26 +18,26 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  text-indent: .0892857143em;
+  text-transform: uppercase;
+  font-weight: 500 !important;
+}
+
+.btn-active {
+  background-color: $active-btn;
 }
 
 .btn-success {
-  color: #fff;
-  background-color: #c78aad;
-  border-color: #a76d8e;
-
+  color: $active-btn;
   &:hover, &:focus {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c78aad), to(#a76d8e));
+    background-color: $active-hover;
   }
 
 }
 
 .btn-cancel, .btn_reset {
-  color: black;
-  background-color: #eee;
-  //border-color: #a76d8e;
-  border-color: #aaa;
-
+  color: gray !important;
   &:hover, &:focus {
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f8f8f8), to(#dcd7d7));
+    background-color: #eeeeee !important;
   }
 }
