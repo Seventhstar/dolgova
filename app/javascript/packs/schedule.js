@@ -29,9 +29,9 @@ function showSchedule() {
   console.log('schedule app', app)
 }
 
-// console.log('js')
+console.log('js')
 
-document.addEventListener('pageshow turbolinks:load',function() {
+document.addEventListener('turbolinks:load',function() {
 //Your code
   console.log('turbolinks:load 2')
 });

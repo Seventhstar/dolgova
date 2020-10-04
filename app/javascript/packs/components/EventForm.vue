@@ -22,7 +22,7 @@
 
           <br></div>
         <div class="actions">
-          <span @click="onSaveTarget($event.target.value)" class="btn btn-min btn-success">Сохранить</span>
+          <span @click="onSaveTarget()" class="btn btn-min btn-success">Сохранить</span>
           <span @click="onCancel()" class="btn btn_reset mr-2">Отменить</span>
         </div>
       </div>
@@ -77,13 +77,15 @@
     mounted() {
       document.body.addEventListener('keyup', e => {
         if (e.code === "Escape") this.onCancel()
-        else if (e.keyCode === 13) this.onConfirm();
+        else if (e.code === "Enter" && e.ctrlKey) this.onSaveTarget()
       })
-      console.log('mounted')
+      // console.log('mounted')
     },
 
     created() {
-      console.log('"2020-09-29T00:00:00.000Z"',  new Date().toDateString())
+      let today = new Date().toISOString().substring(0, 10)
+      // today
+      console.log('"2020-09-29T00:00:00.000Z"', new Date().toDateString())
 
       this.token = document.querySelector("meta[name=csrf-token]").content
       let element = document.getElementById('event-data')
@@ -111,14 +113,11 @@
         t.$emit('input', e)
       },
 
-      onSaveTarget(target_value) {
+      onSaveTarget() {
         const t = this
-        const e = target_value
         axios.defaults.headers.common['X-CSRF-TOKEN'] = this.token
 
-        // axios.patch(`/events/${this.id}`, {
-        // ${this.event.id}
-        console.log('this.event.id', this.event.id)
+        // console.log('this.event.id', this.event.id)
         if (this.event.id !== null) {
           axios.patch(`/events`, {
             format: 'json',

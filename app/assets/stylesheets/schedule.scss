@@ -63,3 +63,17 @@
 .vdatetime.time input {
   width: 36px;
 }
+
+.schedule-date {
+  color: white;
+  background-color: #cfc0c5;
+  text-align: center;
+  border-radius: 8px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: bold;
+
+  &.today {
+    background-color: #b8999f
+  }
+}

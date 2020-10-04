@@ -6,6 +6,13 @@
   float: left;
 }
 
+.event-row-short .sofa{
+  background: asset-url("sofa-12.png") no-repeat 0 0;
+  width: 12px;
+  height: 12px;
+
+}
+
 .online {
   background: asset-url("online.png") no-repeat 0 0;
   display: block;

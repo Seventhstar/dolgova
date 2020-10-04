@@ -4,40 +4,35 @@
       <div class="h2">Расписание</div>
       <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click="onAdd()">Добавить</div>
     </div>
-    <ScheduleTabs/>
+    <ScheduleTabs v-model="currentTab" @switchTab="onSwitchTab($event)"/>
     <EventForm v-model="currentEvent" @input="onInput($event)" v-show="showModal"/>
-    <div id="event-list">
-      <div class="event_row" v-for="event in events" @dblclick="editEvent(event)">
-        <div class="event-list-item">
-          <span>{{formatTime(event.time_from)}}</span>
-          <span :style="{ 'background-color': '#'+event.color }" class="color-column"></span>
-          <span>{{event.linked_user_name}}</span>
-          <span>{{event.meeting_name}}</span>
-          <span>баланс</span>
 
-          <span class="second_row">{{formatTime(event.time_to)}}</span>
-          <span :style="{ 'background-color': '#'+event.color }" class="color-column"></span>
-          <span class="second_row">{{event.linked_user_phone}}</span>
-          <span class="second_row">{{event.comment}}</span>
-          <span class="second_row">{{event.tarif_info}}</span>
+    <div class="event-list-container" v-show="currentTab === 0">
+      <DayEventsList :events="grouped[today]" @showModal="onShowModal($event)"/>
+    </div>
+    <div class="event-list-container" v-show="currentTab === 1">
+      <DayEventsList :events="grouped[tomorrow]" @showModal="onShowModal($event)"/>
+    </div>
+    <div class="event-list-container" v-show="currentTab === 2">
+      <div class="week-days-grid">
+        <div class="week-day" v-for="day, index in week">
+          <div :class="{ 'today': day===today, 'schedule-date': true }">
+            {{parseInt(day.substring(8, 10))}}, {{weekDays[index]}}
+          </div>
+          <DayEventsList :events="grouped[day]" @showModal="onShowModal($event)" :short="true"/>
         </div>
-        <span class="event_icon">
-            <template v-if="event.online">
-              <span class="online"></span>
-            </template>
-            <template v-else>
-              <span class="sofa"></span>
-            </template>
-          </span>
       </div>
     </div>
+
+
   </div>
 </template>
 
 <script>
 
-  import axios from "axios"
+  // import axios from "axios"
   import ScheduleTabs from "./scheduletabs.vue";
+  import DayEventsList from "./DayEventsList.vue";
   import EventForm from "./EventForm.vue";
 
   export default {
@@ -45,15 +40,25 @@
     data() {
       return {
         id: null,
+
+        today: '',
+        tomorrow: '',
+        week: [],
+        weekDays: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
+
         token: '',
         target: null,
         showModal: false,
         currentEvent: {},
+        currentTab: 0,
         sets_names: [],
         parents: [],
         groups: [],
         events: [],
-        count_names: []
+        count_names: [],
+        tabsValues: [],
+        grouped: [],
+        groupNames: []
       }
     },
 
@@ -62,6 +67,29 @@
       if (element !== null) {
         this.events = JSON.parse(element.dataset.events)
       }
+      this.updateGroups()
+
+      let date = new Date()
+      this.today = this.dateToStr(date)
+      date.setDate(date.getDate() + 1)
+      this.tomorrow = this.dateToStr(date)
+      date = new Date()
+      let startOfWeek = new Date(date.setDate(date.getDate() - date.getDay() + (date.getDay() === 0 ? -6 : 1)))
+
+      this.tabsValues.push(this.today)
+      this.tabsValues.push(this.tomorrow)
+      this.week.length = 0
+
+      this.week.push(this.dateToStr(startOfWeek))
+      date = startOfWeek
+      for (let i = 0; i < 6; i++) {
+        date.setDate(date.getDate() + 1)
+        this.week.push(this.dateToStr(date))
+      }
+
+      console.log('week', startOfWeek, this.week, 'today', this.today)
+      this.tabsValues.push(date.toISOString().substring(0, 10))
+      this.tabsValues.push(date.toISOString().substring(0, 10))
     },
 
     methods: {
@@ -80,6 +108,7 @@
           }
 
         }
+        this.updateGroups()
         console.log('onInput', e)
       },
 
@@ -88,17 +117,50 @@
         this.currentEvent = null
       },
 
-      editEvent(event) {
-        this.currentEvent = event
-        this.showModal = true
+      onShowModal(event) {
+        this.showModal = event.showModal
+        this.currentEvent = event.currentEvent
       },
 
-      formatTime(str) {
-        return formatTime(str)
+
+      updateGroups(groupName = 'date') {
+        // this.checkGroupName(groupName)
+        this.grouped = _.groupBy(this.events, 'date')
+        this.groupHeaders = Object.keys(this.grouped)
+
+        for (let i = 0; i < this.groupHeaders.length; ++i) {
+          let arr = this.grouped[this.groupHeaders[i]]
+          if (arr !== undefined)
+            this.$set(this.grouped, this.groupHeaders[i], this.sort(arr))
+        }
+        console.log('this.grouped', this.grouped)
+      },
+
+      sort(arr) {
+        // let vm = this
+        // let s = this.reverse ? 1 : -1
+        // let ns = this.reverse ? -1 : 1
+
+        return arr.sort((a, b) => {
+          let res = (a['time_from'] > b['time_from']) ? 1 : ((b['time_from'] > a['time_from']) ? -1 : 0)
+          console.log(a['time_from'], b['time_from'], res)
+          return res
+        })
+      },
+
+      onSwitchTab(tab) {
+        this.currentTab = tab
+        console.log('tab', tab)
+      },
+
+      dateToStr(date) {
+        return date.toISOString().substring(0, 10)
       }
+
     },
 
     components: {
+      DayEventsList: DayEventsList,
       ScheduleTabs: ScheduleTabs,
       EventForm: EventForm,
     }

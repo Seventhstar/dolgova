@@ -12,10 +12,15 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require underscore-min
+//= require_self
 //= require_tree .
 
+console.log('app js')
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('readystatechange', () => console.log(document.readyState));
+
+document.addEventListener("DOMContentLoaded", () => {
   // Handler when the DOM is fully loaded
 
   const letters = Array.from(document.querySelectorAll('.v-ripple'))

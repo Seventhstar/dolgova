@@ -1,0 +1,52 @@
+// Place all the styles related to the enent controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.event_icon {margin-top: 7px}
+
+.event-row {
+  display: grid;
+  background-color: white;
+  grid-template-columns: 1fr 38px;
+  align-content: center;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+
+  .event-list-item {
+    display: grid;
+    grid-template-columns: 50px 24px 1fr 1fr 90px;
+  }
+
+  .second_row {
+    font-size: 14px;
+    color: gray;
+  }
+}
+
+.event-row-short {
+  //display: grid;
+  background-color: white;
+  //grid-template-columns: 1fr 12px;
+  font-size: 12px;
+  align-content: center;
+  margin: 4px 0;
+  padding: 4px;
+  border-radius: 4px;
+  .event-list-item {
+    display: grid;
+    grid-template-columns: 28px 6px 1fr 50px 12px;
+  }
+  .second_row {
+    font-size: 10px;
+    color: gray;
+  }
+}
+
+
+
+
+.color-column {
+  margin-right: 14px;
+}
