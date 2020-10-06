@@ -54,7 +54,12 @@
 
     methods: {
       name(event) {
-        return event.event_type_id != 2 ? 'Доступно для консультаций' : event.linked_user_name
+        switch (event.event_type_id) {
+          case 1: return 'Доступно для консультаций'
+          case 2: return event.linked_user_name
+        }
+
+        return event.comment
       },
 
       editEvent(event) {
