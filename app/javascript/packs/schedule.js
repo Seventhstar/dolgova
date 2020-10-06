@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './components/schedule.vue'
+import App from './components/Schedule.vue'
 import vSelect from "vue-select"
 // import axios from "axios"
 

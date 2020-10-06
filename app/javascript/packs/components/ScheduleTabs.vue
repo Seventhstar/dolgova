@@ -19,8 +19,6 @@
 
     created() {
       this.tabsValues.length = 0
-
-
     },
 
     methods: {
@@ -31,7 +29,6 @@
 
       onClick(index) {
         this.currentTab = index
-
         this.$emit('switchTab', index)
       }
     }

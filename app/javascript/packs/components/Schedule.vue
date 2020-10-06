@@ -40,12 +40,12 @@
 <script>
 
   // import axios from "axios"
-  import ScheduleTabs from "./scheduletabs.vue";
+  import ScheduleTabs from "./ScheduleTabs.vue";
   import DayEventsList from "./DayEventsList.vue";
   import EventForm from "./EventForm.vue";
 
   export default {
-    name: "schedule",
+    name: "Schedule",
     data() {
       return {
         id: null,

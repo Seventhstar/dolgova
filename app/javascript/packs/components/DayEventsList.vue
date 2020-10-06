@@ -1,40 +1,30 @@
 <template>
   <div class="event-list">
-    <div :class="'event-row'+[type=='week' ? '-week': '']" v-for="event in events" @dblclick="editEvent(event)">
+    <div :class="'event-row'+[type=='week' ? '-week': '']"
+         :style="{ 'background-color': event.color }"
+         v-for="event in events" @dblclick="editEvent(event)">
       <div class="event-list-item">
         <span>{{formatTime(event.time_from)}}</span>
-        <span :style="{ 'background-color': '#'+event.color }" class="color-column"></span>
+        <span :style="{ 'background-color': '#'+event.color }" class="color-column" v-if="type==undefined"></span>
         <span>{{name(event)}}</span>
         <span v-if="type==undefined">{{event.meeting_name}}</span>
-        <span>баланс</span>
-        <span class="event_icon" v-if="type!=undefined">
-          <template v-if="event.online">
-            <span class="online"></span>
-          </template>
-          <template v-else>
-            <span class="sofa"></span>
-          </template>
-        </span>
+        <span v-if="type==undefined">баланс</span>
+        <event-icon :event="event" :show="type!=undefined"></event-icon>
+
         <span class="second_row">{{formatTime(event.time_to)}}</span>
-        <span :style="{ 'background-color': '#'+event.color }" class="color-column"></span>
+        <span :style="{ 'background-color': '#'+event.color }" class="color-column" v-if="type==undefined"></span>
         <span class="second_row">{{event.linked_user_phone}}</span>
         <span class="second_row" v-if="type==undefined">{{event.comment}}</span>
-        <span class="second_row">{{event.tarif_info}}</span>
+        <span class="second_row" v-if="type==undefined">{{event.tarif_info}}</span>
       </div>
-      <span class="event_icon" v-if="type==undefined">
-        <template v-if="event.online">
-          <span class="online"></span>
-        </template>
-        <template v-else>
-          <span class="sofa"></span>
-        </template>
-      </span>
+      <event-icon :event="event" :show="type==undefined"></event-icon>
     </div>
   </div>
 </template>
 
 <script>
   import EventForm from "./EventForm.vue";
+  import EventIcon from "./EventIcon.vue";
 
   export default {
     name: "DayEventsList",
@@ -55,8 +45,10 @@
     methods: {
       name(event) {
         switch (event.event_type_id) {
-          case 1: return 'Доступно для консультаций'
-          case 2: return event.linked_user_name
+          case 1:
+            return 'Доступно для консультаций'
+          case 2:
+            return event.linked_user_name
         }
 
         return event.comment
@@ -74,7 +66,7 @@
     },
 
     components:
-        {EventForm: EventForm}
+        {EventForm, EventIcon}
   }
 </script>
 

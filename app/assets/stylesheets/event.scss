@@ -30,12 +30,13 @@
   font-size: 12px;
   align-content: center;
   margin: 4px 0;
-  padding: 4px;
+  padding: 3px;
   border-radius: 4px;
 
   .event-list-item {
     display: grid;
-    grid-template-columns: 28px 6px 1fr 50px 12px;
+    //grid-template-columns: 28px 6px 1fr 50px 12px;
+    grid-template-columns: 32px 1fr 12px;
   }
 
   .second_row {
