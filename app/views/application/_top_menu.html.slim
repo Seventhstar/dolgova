@@ -9,7 +9,7 @@
     .right-toolbar
       .login-info
         .user_name
-          = link_to current_user.name, admin_user_path(current_user) if user_signed_in?
+          = link_to user_name, admin_user_path(current_admin_user) if admin_user_signed_in?
         .options
           = link_to image_tag('settings.svg'), admin_root_path if is_admin?
         .login-icon
