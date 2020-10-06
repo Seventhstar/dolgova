@@ -20,16 +20,23 @@
                       :phrases="phrases"></datetime>
             <span>по:</span>
             <datetime v-model="event.time_to" type="time" :minute-step="5" class="time" :phrases="phrases"></datetime>
-            <span class="duration">1ч</span>
-            <span class="duration">1.5ч</span>
+            <span :class="'duration'+[duration===60? ' active': '']" @click="setDuration(60)">1ч</span>
+            <span :class="'duration'+[duration===90? ' active': '']" @click="setDuration(90)">1.5ч</span>
           </div>
-          <span>Вид события</span>
+          <span>Вид события:</span>
           <v-select :options="event_names" :reduce="v=>v.value" v-model="event.event_type_id"></v-select>
-          <span>Клиент:</span>
-          <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id"></v-select>
-          <span>Вид консультации:</span>
-          <v-select :options="meetings" :reduce="v=>v.value" v-model="event.meeting_id"></v-select>
 
+          <template v-if="event.event_type_id == 2">
+            <span>Клиент:</span>
+            <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id"></v-select>
+            <span>Вид консультации:</span>
+            <v-select :options="meetings" :reduce="v=>v.value" v-model="event.meeting_id"></v-select>
+          </template>
+
+          <span>Комментарий:</span>
+          <textarea v-model="event.comment">
+
+          </textarea>
           <br></div>
         <div class="actions">
           <span @click="onSaveTarget()" class="btn btn-min btn-success">Сохранить</span>
@@ -54,14 +61,16 @@
         date: '',
         time_from: '',
         all_weeks: false,
-        duration: 1,
+        duration: 60,
         eventTemplate: {
+          id: null,
+          comment: '',
           date: new Date().toISOString(),
           time_from: '2020-09-29T06:00:00.000Z',
           time_to: '2020-09-29T07:00:00.000Z',
-          id: null,
-          event_type_id: 1,
-          linked_user_id: 1,
+          event_type_id: 2,
+          linked_user_id: 3,
+          meeting_id: 1,
         },
         event: {},
         event_names: '',
@@ -72,12 +81,21 @@
     },
 
     watch: {
-      value: function (newVal, oldVal) {
-        let eventData = newVal === null ? this.eventTemplate : newVal
-        for (let i in eventData) {
-          this.$set(this.event, i, eventData[i])
-        }
+      value: function (newVal) {
+        this.fillEventData(newVal)
       },
+
+      'event.time_from': function (newVal) {
+        this.event.time_to = new Date(new Date(newVal).getTime() + this.duration * 60000).toISOString()
+      },
+
+      'event.event_type_id': function (newVal) {
+        if (newVal != 2) {
+          this.event.meeting_id = null
+          this.event.linked_user_id = null
+        }
+      }
+
     },
 
     computed: {
@@ -98,14 +116,28 @@
       this.token = document.querySelector("meta[name=csrf-token]").content
       let element = document.getElementById('event-data')
       if (element !== null) {
-        console.log('EventForm vue created()')
         this.users = JSON.parse(element.dataset.users)
         this.meetings = JSON.parse(element.dataset.meetings)
         this.event_names = JSON.parse(element.dataset.eventtypes)
       }
+      this.fillEventData(null)
     },
 
     methods: {
+      fillEventData(newVal) {
+        let eventData = newVal === null ? this.eventTemplate : newVal
+        for (let i in eventData) {
+          this.$set(this.event, i, eventData[i])
+        }
+
+        this.duration = Math.abs(new Date(this.event.time_to) - new Date(this.event.time_from)) / 60000
+      },
+
+      setDuration(minutes) {
+        this.duration = minutes
+        this.event.time_to = new Date(new Date(this.event.time_from).getTime() + minutes * 60000).toISOString()
+      },
+
       onCancel() {
         this.$emit('input')
       },

@@ -19,7 +19,16 @@
           <div :class="{ 'today': day===today, 'schedule-date': true }">
             {{parseInt(day.substring(8, 10))}}, {{weekDays[index]}}
           </div>
-          <DayEventsList :events="grouped[day]" @showModal="onShowModal($event)" :short="true"/>
+          <DayEventsList :events="grouped[day]" @showModal="onShowModal($event)" type="week"/>
+        </div>
+      </div>
+    </div>
+    <div class="event-list-container" v-show="currentTab === 3">
+      <div class="week-days-grid">
+        <div class="week-day" v-for="day, index in week">
+          <div :class="{ 'today': day===today, 'schedule-date': true }">
+            {{weekDays[index]}}
+          </div>
         </div>
       </div>
     </div>
@@ -87,9 +96,9 @@
         this.week.push(this.dateToStr(date))
       }
 
-      console.log('week', startOfWeek, this.week, 'today', this.today)
-      this.tabsValues.push(date.toISOString().substring(0, 10))
-      this.tabsValues.push(date.toISOString().substring(0, 10))
+      //console.log('week', startOfWeek, this.week, 'today', this.today)
+      this.tabsValues.push(this.dateToStr(date))
+      this.tabsValues.push(this.dateToStr(date))
     },
 
     methods: {
@@ -103,7 +112,6 @@
           let forUpdate = this.events.filter(e => e.id === id)
           if (forUpdate.length > 0) {
             let i = this.events.indexOf(forUpdate[0])
-            console.log('forUpdate', forUpdate, i)
             this.$set(this.events, i, e.data)
           }
 
@@ -137,20 +145,13 @@
       },
 
       sort(arr) {
-        // let vm = this
-        // let s = this.reverse ? 1 : -1
-        // let ns = this.reverse ? -1 : 1
-
-        return arr.sort((a, b) => {
-          let res = (a['time_from'] > b['time_from']) ? 1 : ((b['time_from'] > a['time_from']) ? -1 : 0)
-          console.log(a['time_from'], b['time_from'], res)
-          return res
-        })
+        return arr.sort((a, b) =>
+           (a['time_from'] > b['time_from']) ? 1 : ((b['time_from'] > a['time_from']) ? -1 : 0)
+        )
       },
 
       onSwitchTab(tab) {
         this.currentTab = tab
-        console.log('tab', tab)
       },
 
       dateToStr(date) {

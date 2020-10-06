@@ -25,7 +25,7 @@
   }
 }
 
-.event-row-short {
+.event-row-week {
   background-color: white;
   font-size: 12px;
   align-content: center;
@@ -54,4 +54,9 @@ span.duration {
   text-align: center;
   border-radius: 3px;
   padding: 3px 5px;
+  cursor: pointer;
+
+  &.active {
+    background-color: $head-color-dark
+  }
 }

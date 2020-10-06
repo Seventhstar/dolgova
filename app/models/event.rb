@@ -1,8 +1,8 @@
 class Event < ApplicationRecord
   validates :date, presence: true
   belongs_to :event_type
-  belongs_to :meeting
-  belongs_to :linked_user, class_name: 'User', foreign_key: :linked_user_id
+  belongs_to :meeting, optional: :true
+  belongs_to :linked_user, class_name: 'User', foreign_key: :linked_user_id, optional: :true
 
   def linked_user_name
     self.linked_user&.name
