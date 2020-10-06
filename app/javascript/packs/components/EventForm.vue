@@ -4,14 +4,24 @@
       <div class="modal-head">{{eventName}}</div>
       <div class="modal-body">
         <div class="grid_short_label_name">
-          <span>Дата</span>
-          <div class="date-times">
+          <span>Дата:</span>
+          <div class="date-week">
             <datetime v-model="event.date" class="date" :phrases="phrases" :auto=true></datetime>
-            <span>c:</span>
+
+            <div class="check-container">
+              <input type="checkbox" v-model="all_weeks" id="all_weeks" class="custom-checkbox">
+              <label for="all_weeks">Каждую неделю</label>
+            </div>
+          </div>
+
+          <span>Время c:</span>
+          <div class="times">
             <datetime v-model="event.time_from" type="time" :minute-step="5" class="time" title="Начало события"
                       :phrases="phrases"></datetime>
             <span>по:</span>
             <datetime v-model="event.time_to" type="time" :minute-step="5" class="time" :phrases="phrases"></datetime>
+            <span class="duration">1ч</span>
+            <span class="duration">1.5ч</span>
           </div>
           <span>Вид события</span>
           <v-select :options="event_names" :reduce="v=>v.value" v-model="event.event_type_id"></v-select>
@@ -43,6 +53,8 @@
         phrases: {ok: "Выбрать", cancel: "Отменить"},
         date: '',
         time_from: '',
+        all_weeks: false,
+        duration: 1,
         eventTemplate: {
           date: new Date().toISOString(),
           time_from: '2020-09-29T06:00:00.000Z',
@@ -83,10 +95,6 @@
     },
 
     created() {
-      let today = new Date().toISOString().substring(0, 10)
-      // today
-      console.log('"2020-09-29T00:00:00.000Z"', new Date().toDateString())
-
       this.token = document.querySelector("meta[name=csrf-token]").content
       let element = document.getElementById('event-data')
       if (element !== null) {
