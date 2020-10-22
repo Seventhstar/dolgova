@@ -5,4 +5,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, 
          :recoverable, :rememberable, :validatable
 
+  scope :only_actual, ->{where(actual: true).order(:name)}
+
 end

@@ -17,18 +17,22 @@ class EventsController < ApplicationController
     respond_with(@event)
   end
 
+  def destroy
+    @event.destroy!
+    head :no_content
+  end
+
   private
 
-  def event_params
-    params.require(:event).permit(:date, :time_from, :time_to,
-                                  :event_type_id, :comment, :id,
-                                  :linked_user_id, :online, :meeting_id)
-  end
+    def event_params
+      params.require(:event).permit(:date, :time_from, :time_to,
+                                    :event_type_id, :comment, :id,
+                                    :linked_user_id, :online, :meeting_id)
+    end
 
-  def load_event
-    @event = Event.find(params[:id])
-  end
-
+    def load_event
+      @event = Event.find(params[:id])
+    end
 
 
 end

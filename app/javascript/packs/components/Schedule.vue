@@ -15,7 +15,7 @@
     </div>
     <div class="event-list-container" v-show="currentTab === 2">
       <div class="week-days-grid">
-        <div class="week-day" v-for="day, index in week">
+        <div class="week-day" v-for="(day, index) in week">
           <div :class="{ 'today': day===today, 'schedule-date': true }">
             {{parseInt(day.substring(8, 10))}}, {{weekDays[index]}}
           </div>
@@ -25,7 +25,7 @@
     </div>
     <div class="event-list-container" v-show="currentTab === 3">
       <div class="week-days-grid">
-        <div class="week-day" v-for="day, index in week">
+        <div class="week-day" v-for="(day, index) in week">
           <div :class="{ 'today': day===today, 'schedule-date': true }">
             {{weekDays[index]}}
           </div>
@@ -105,7 +105,13 @@
       onInput(e) {
         this.showModal = false
         if (e === undefined) return
-        if (!e.update) {
+        if (e.delete) {
+          let forDelete = this.events.filter(f => f.id === e.id)
+          if (forDelete.length) {
+            let index = this.events.indexOf(forDelete[0])
+            this.events.splice(index, 1)
+          }
+        } else if (!e.update) {
           this.events.push(e.data)
         } else {
           let id = e.data.id

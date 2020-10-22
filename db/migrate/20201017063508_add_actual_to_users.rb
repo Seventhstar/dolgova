@@ -1,0 +1,5 @@
+class AddActualToUsers < ActiveRecord::Migration[6.0]
+  def change
+    add_column :users, :actual, :boolean, default: true
+  end
+end

@@ -1,6 +1,6 @@
 <template>
   <div id="schedule-tabs">
-    <span :class="tabClass(index)" @click="onClick(index)" v-for="tab, index in tabs">
+    <span :class="tabClass(index)" @click="onClick(index)" v-for="(tab, index) in tabs">
       {{tab}}
     </span>
   </div>

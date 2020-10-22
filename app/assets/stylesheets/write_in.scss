@@ -1,0 +1,54 @@
+#write-in-modal {
+  z-index: 7;
+  align-items: center;
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+
+}
+
+.write-in-modal-content {
+  background: #fff;
+  color: rgba(0, 0, 0, .87);
+  border-radius: 5px;
+  height: 80%;
+  top: 0px;
+  transform: translateX(0%);
+  width: 95%;
+  box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+}
+
+.v-overlay {
+  align-items: center;
+  border-radius: inherit;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  transition: .3s cubic-bezier(.25, .8, .5, 1), z-index 1ms;
+}
+
+.v-overlay__scrim {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: inherit;
+  width: 100%;
+  will-change: opacity;
+}
+
+/* Анимации появления и исчезновения */
+.slide-fade-enter-active {transition: all .4s ease; }
+.slide-fade-leave-active {transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0); }
+.slide-fade-enter, .slide-fade-leave-to {transform: translateX(400px); opacity: 0; }

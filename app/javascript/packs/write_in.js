@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './components/Schedule.vue'
+import App from './components/WriteIn.vue'
 import vSelect from "vue-select"
 import {Datetime} from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
@@ -15,10 +15,10 @@ Vue.component('datetime', Datetime);
 const axios = require('axios').default;
 
 function showSchedule() {
-  let schedule = document.getElementById('schedule_app')
+  let schedule = document.getElementById('write-in-form')
   if (schedule !== null) {
     const app = new Vue({
-      el: '#schedule_app',
+      el: '#write-in-form',
       render: h => h(App)
     }).$mount()
     console.log('schedule app', app)

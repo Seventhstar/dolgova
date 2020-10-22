@@ -31,3 +31,28 @@
   grid-template-columns: repeat(7, 1fr);
   grid-column-gap: 4px;
 }
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+        
+.row {
+    display: flex;
+    flex-wrap: wrap; 
+    flex: 1 1 auto; 
+    //margin-right: -12px;
+    //margin-left: -12px;
+}
+
+.table-wrap {
+    flex: 1 1 auto;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 100%;
+    position: relative;
+}

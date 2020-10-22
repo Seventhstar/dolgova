@@ -1,19 +1,20 @@
 <template>
   <div class="modal" id="myModal">
     <div class="modal-content">
-      <div class="modal-head">{{eventName}}</div>
+      <div class="modal-head">{{eventName}}
+        <span @click="deleteEvent()" class="icon icon_remove right" title="Удалить">×</span>
+
+      </div>
       <div class="modal-body">
         <div class="grid_short_label_name">
           <span>Дата:</span>
           <div class="date-week">
             <datetime v-model="event.date" class="date" :phrases="phrases" :auto=true></datetime>
-
             <div class="check-container">
               <input type="checkbox" v-model="all_weeks" id="all_weeks" class="custom-checkbox">
               <label for="all_weeks">Каждую неделю</label>
             </div>
           </div>
-
           <span>Время c:</span>
           <div class="times">
             <datetime v-model="event.time_from" type="time" :minute-step="5" class="time" title="Начало события"
@@ -25,17 +26,14 @@
           </div>
           <span>Вид события:</span>
           <v-select :options="event_names" :reduce="v=>v.value" v-model="event.event_type_id"></v-select>
-
           <template v-if="event.event_type_id == 2">
             <span>Клиент:</span>
             <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id"></v-select>
             <span>Вид консультации:</span>
             <v-select :options="meetings" :reduce="v=>v.value" v-model="event.meeting_id"></v-select>
           </template>
-
           <span>Комментарий:</span>
           <textarea v-model="event.comment">
-
           </textarea>
           <br></div>
         <div class="actions">
@@ -50,10 +48,12 @@
 <script>
 
   import axios from "axios";
+  import rorHTTP from "../mixins/rorHTTP.vue"
 
   export default {
     name: "EventForm",
     props: ['value'],
+    mixins: [rorHTTP],
     // props: ['currentEvent'],
     data: function () {
       return {
@@ -178,7 +178,12 @@
             t.showError(t, error)
           })
         }
+      },
+
+      deleteEvent() {
+        rorHTTP.deleteObject(this, 'event', this.event.id)
       }
+
     }
   }
 </script>
