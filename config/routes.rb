@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  get 'ajax/write_in'
+  #devise_for :admin_users, ActiveAdmin::Devise.config
+
   devise_for :users, ActiveAdmin::Devise.config
+#             controllers: { registrations: 'users/registrations',
+#                            sessions: 'users/sessions'}
+
   get 'schedule/index'
   ActiveAdmin.routes(self)
   get 'static/index'
   root to: "static#index"
   resource :events
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  post "ajax/write_in"
 end

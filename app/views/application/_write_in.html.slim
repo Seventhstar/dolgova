@@ -1,2 +1,4 @@
 #write-in-form
+= content_tag :div, id: 'write-data',
+        data: {adates: for_vue(Event.where(event_type_id: 1))} do
 = javascript_pack_tag 'write_in'

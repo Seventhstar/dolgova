@@ -4,9 +4,12 @@ import vSelect from "vue-select"
 import {Datetime} from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 
+import test from './mixins/test.vue'
+
 import VueNoty from 'vuejs-noty'
 
 Vue.use(VueNoty)
+Vue.use(test)
 //Vue.use(Datetime)
 
 Vue.component("v-select", vSelect);

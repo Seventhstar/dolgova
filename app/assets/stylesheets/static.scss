@@ -1,14 +1,64 @@
 .about_card {
-  display: grid; grid-template-columns: 1fr 360px; 
-  background-color: white; 
-  padding: 20px;
-  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  background-color: white;
+  padding: 20px 20px 30px 20px;
+  margin: 40px auto;
   max-width: 1200px;
   -webkit-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
   -moz-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
   box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+  font-size: 16px;
+  color: #383434;
+
+  & img {
+    //margin: 20px 10px 0 0;
+    margin: 13px 10px 0 22px;
+  }
 }
 
-.social {display: grid; grid-template-columns: 150px 32px 32px; column-gap: 6px;}
+.about_text.full {
+  grid-column: 1 / -1;
+  margin-top: 0;
+  padding-top: 0;
+}
 
-.about_text {padding: 20px;}
+.social {
+  display: grid;
+  grid-template-columns: 150px 32px 32px;
+  column-gap: 6px;
+}
+
+.about_text {
+  padding: 10px 20px 0 20px;
+
+  & li {
+    //float: left;
+    margin-bottom: 4px;
+  }
+}
+
+.icons_card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  background-color: white;
+  padding: 40px 20px 30px 20px;
+  margin: 40px auto;
+  max-width: 1200px;
+  -webkit-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
+  align-content: center;
+  & img {
+    align-self: center;
+    justify-self: center;
+    width: 40%;
+  }
+
+  & b, p {
+    text-align: center;
+    font-size: 24px;
+    margin: 8px 40px;
+  }
+}
