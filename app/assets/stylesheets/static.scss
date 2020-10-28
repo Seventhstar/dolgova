@@ -38,10 +38,7 @@
   }
 }
 
-.icons_card {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
+.card {
   background-color: white;
   padding: 40px 20px 30px 20px;
   margin: 40px auto;
@@ -50,6 +47,7 @@
   -moz-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
   box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
   align-content: center;
+
   & img {
     align-self: center;
     justify-self: center;
@@ -60,5 +58,21 @@
     text-align: center;
     font-size: 24px;
     margin: 8px 40px;
+  }
+}
+
+.icons_card_3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 200px 76px 54px;
+}
+
+.icons_card_2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 200px 76px;
+  margin-top: 26px;
+  & img {
+    width: 25%;
   }
 }
