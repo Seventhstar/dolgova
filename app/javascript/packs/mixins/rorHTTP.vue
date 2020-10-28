@@ -42,13 +42,10 @@
     },
 
     ajax(context, url, data) {
-      // let params = {format: 'json'}
-      // for (let d in data) {
-      //   console.log('param d', d, data[d])
-      // }
       axios.post(`/ajax/${url}`, {format: 'json', data: data})
           .then(function (response) {
-            context.$emit('written', {update: false, data: response.data})
+            context.$root.$emit('written', {update: false, data: response.data})
+            context.$noty.success('Успешно записано')
           }).catch(function (error) {
         log.showError(context, error)
       })

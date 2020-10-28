@@ -23,12 +23,20 @@
   font-weight: 500 !important;
 }
 
+.btn[readonly="readonly"], .btn[disabled="disabled"],
+.v-btn[readonly="readonly"], .v-btn[disabled="disabled"] {
+  background-color: lightgray !important;
+  color: gray !important;
+  cursor: not-allowed;
+}
+
 .btn-active {
   background-color: $active-btn;
 }
 
 .btn-success {
   color: $active-btn;
+
   &:hover, &:focus {
     background-color: $active-hover;
   }
@@ -37,6 +45,7 @@
 
 .btn-cancel, .btn_reset {
   color: gray !important;
+
   &:hover, &:focus {
     background-color: #eeeeee !important;
   }

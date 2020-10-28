@@ -9,12 +9,11 @@
       </button>
     </div>
     <div class="v-overlay" v-show="showWriteInDialog" @click="overlayClick($event)">
-      <div class="v-overlay__scrim"
-           style="opacity: 0.46; background-color: rgb(33, 33, 33); border-color: rgb(33, 33, 33);"></div>
+      <div class="overlay-container"></div>
     </div>
 
     <transition name="slide-fade">
-      <div id="write-in-modal" v-show="showWriteInDialog" :style="style()">
+      <div id="write-in-modal" v-show="showWriteInDialog">
 
         <div class="ma-10 write-in-modal-content">
           <div class="write-in-header">
@@ -58,7 +57,8 @@
               </div>
             </div>
             <div class="row flex-end mt-4">
-              <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click="doWrite()">Записаться
+              <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click.prevent="doWrite()"
+                   :disabled="!formValid">Записаться
               </div>
             </div>
           </div>
@@ -111,6 +111,8 @@
         isGroup: false,
         isOnline: false,
 
+        formValid: false,
+
         name: '',
         phone: '',
         email: '',
@@ -132,7 +134,21 @@
       }
     },
 
+    updated() {
+      console.log('updated')
+      let valid = true
+      if (this.name.length < 3) valid = false
+      if (this.phone.length < 3) valid = false
+      if (this.email.length < 3) valid = false
+
+      this.formValid = valid
+      console.log('this.formValid', this.formValid)
+    },
+
     created() {
+
+      this.$root.$on('written', this.written)
+
       let element = document.getElementById('write-data')
       if (element !== null) {
         this.availableDates = JSON.parse(element.dataset.adates)
@@ -163,7 +179,6 @@
 
         let that = this;
         document.addEventListener('keyup', function (event) {
-//        console.log('event', event, event.key === 'Escape', 'this.showCalendar', that.showCalendar, that.showWriteInDialog)
           if (event.key === 'Escape') {
             if (that.showCalendar)
               that.showCalendar = false
@@ -191,10 +206,6 @@
         this.showWriteInDialog = !this.showWriteInDialog
       },
 
-      style() {
-        //return this.showWriteInDialog ? 'transform: translateX(0%);' : 'transform: translateX(100%);'
-      },
-
       formatTime(str) {
         return formatTime(str)
       },
@@ -209,6 +220,10 @@
         this.showCalendar = false
       },
 
+      written() {
+        this.showWriteInDialog = false;
+      },
+
       doWrite() {
         http.ajax(this, 'write_in', {
           name: this.name,
@@ -221,11 +236,10 @@
     }
   }
 </script>
-<style>
 
+<style>
   label {
     font-size: 14px;
-    /*font-family: 'Exo 2';*/
   }
 
   .write-in-header {
@@ -278,5 +292,4 @@
     display: block;
     border-bottom: 1px solid #bbb;
   }
-
 </style>

@@ -32,7 +32,6 @@
       },
 
       style() {
-        console.log('this.width', this.width)
         if (this.width !== undefined)
           return `width: ${this.width}px`
         return ''

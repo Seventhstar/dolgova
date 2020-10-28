@@ -75,3 +75,9 @@ button, input, optgroup, select, textarea {
     font-size: 22px;
     margin-bottom: 12px !important;
 }
+
+ul.no-mark {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}

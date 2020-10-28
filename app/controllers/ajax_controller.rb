@@ -15,7 +15,7 @@ class AjaxController < ApplicationController
     end
     #puts "user #{user}"
     if user.present?
-      event = Event.find_by(date: data[:event][:date])
+      event = Event.find_by(date: data[:event][:date], time_from: data[:event][:time])
       puts "event #{event}"
       if event.present?
         event.update_attributes({linked_user_id: user.id,
