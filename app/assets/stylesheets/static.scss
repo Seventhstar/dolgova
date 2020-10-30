@@ -47,17 +47,28 @@
   -moz-box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
   box-shadow: 7px 7px 3px 0 rgba(0, 0, 0, 0.08);
   align-content: center;
+}
 
-  & img {
-    align-self: center;
-    justify-self: center;
-    width: 40%;
-  }
+.child-right {
+  display: flex;
+  justify-content: flex-end;
+}
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.icons_card {
   & b, p {
     text-align: center;
     font-size: 24px;
     margin: 8px 40px;
+  }
+  & img {
+    align-self: center;
+    justify-self: center;
+    width: 40%;
   }
 }
 

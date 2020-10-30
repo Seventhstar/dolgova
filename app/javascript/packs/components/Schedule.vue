@@ -8,12 +8,10 @@
     <EventForm v-model="currentEvent" @input="onInput($event)" v-show="showModal"/>
 
     <div class="event-list-container" v-show="currentTab === 0">
-      <DayEventsList :events="grouped[today]" @showModal="onShowModal($event)"/>
+      <DayEventsList :events="grouped[currentDay]" @showModal="onShowModal($event)"/>
     </div>
+
     <div class="event-list-container" v-show="currentTab === 1">
-      <DayEventsList :events="grouped[tomorrow]" @showModal="onShowModal($event)"/>
-    </div>
-    <div class="event-list-container" v-show="currentTab === 2">
       <div class="week-days-grid">
         <div class="week-day" v-for="(day, index) in week">
           <div :class="{ 'today': day===today, 'schedule-date': true }">
@@ -23,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="event-list-container" v-show="currentTab === 3">
+    <div class="event-list-container" v-show="currentTab === 2">
       <div class="week-days-grid">
         <div class="week-day" v-for="(day, index) in week">
           <div :class="{ 'today': day===today, 'schedule-date': true }">
@@ -40,6 +38,7 @@
 <script>
 
   // import axios from "axios"
+  import {_} from 'vue-underscore'
   import ScheduleTabs from "./ScheduleTabs.vue";
   import DayEventsList from "./DayEventsList.vue";
   import EventForm from "./EventForm.vue";
@@ -60,6 +59,9 @@
         showModal: false,
         currentEvent: {},
         currentTab: 0,
+
+        currentDay: null,
+
         sets_names: [],
         parents: [],
         groups: [],
@@ -80,6 +82,7 @@
 
       let date = new Date()
       this.today = this.dateToStr(date)
+      this.currentDay = this.today
       date.setDate(date.getDate() + 1)
       this.tomorrow = this.dateToStr(date)
       date = new Date()

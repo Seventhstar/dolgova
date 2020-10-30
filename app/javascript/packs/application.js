@@ -17,7 +17,7 @@
 
 // console.log('Hello World from Webpacker')
 
-window.formatTime = function (str) {
-  if (str === null) return ''
-  return new Date(str).toString().slice(16, 21)
-}
+// window.formatTime = function (str) {
+//   if (str === null) return ''
+//   return new Date(str).toString().slice(16, 21)
+// }

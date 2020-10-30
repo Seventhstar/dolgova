@@ -5,12 +5,13 @@ import {Datetime} from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 
 import test from './mixins/test.vue'
+import dt from './mixins/dt-mixin.js'
 
 import VueNoty from 'vuejs-noty'
+import datetime from "luxon/src/datetime";
 
 Vue.use(VueNoty)
-Vue.use(test)
-//Vue.use(Datetime)
+Vue.use(dt)
 
 Vue.component("v-select", vSelect);
 Vue.component('datetime', Datetime);

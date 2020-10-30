@@ -4,10 +4,14 @@ import vSelect from "vue-select"
 import {Datetime} from 'vue-datetime'
 import 'vue-datetime/dist/vue-datetime.css'
 
+import underscore from 'vue-underscore'
+
 import VueNoty from 'vuejs-noty'
+import dt from './mixins/dt-mixin.js'
 
 Vue.use(VueNoty)
-//Vue.use(Datetime)
+Vue.use(dt)
+Vue.use(underscore)
 
 Vue.component("v-select", vSelect);
 Vue.component('datetime', Datetime);
@@ -21,7 +25,7 @@ function showSchedule() {
       el: '#schedule_app',
       render: h => h(App)
     }).$mount()
-    console.log('schedule app', app)
+    // console.log('schedule app', app)
   }
 }
 

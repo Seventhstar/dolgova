@@ -44,11 +44,13 @@
     ajax(context, url, data) {
       axios.post(`/ajax/${url}`, {format: 'json', data: data})
           .then(function (response) {
-            context.$root.$emit('written', {update: false, data: response.data})
+            context.$root.$emit('written', {success: true, data: response.data})
             context.$noty.success('Успешно записано')
-          }).catch(function (error) {
-        log.showError(context, error)
-      })
+          })
+          .catch(function (error) {
+            context.$root.$emit('written', {success: false, data: error})
+            log.showError(context, error)
+          })
     },
 
     deleteObject(context, model, id, url = null) {

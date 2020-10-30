@@ -81,3 +81,7 @@ ul.no-mark {
     margin: 0;
     padding: 0;
 }
+
+.fullwidth {
+    width: 100% !important;
+}

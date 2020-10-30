@@ -26,7 +26,7 @@
           </div>
           <span>Вид события:</span>
           <v-select :options="event_names" :reduce="v=>v.value" v-model="event.event_type_id"></v-select>
-          <template v-if="event.event_type_id == 2">
+          <template v-if="[2, 4].includes(event.event_type_id)">
             <span>Клиент:</span>
             <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id"></v-select>
             <span>Вид консультации:</span>
@@ -65,12 +65,12 @@
         eventTemplate: {
           id: null,
           comment: '',
-          date: new Date().toISOString(),
-          time_from: '2020-09-29T06:00:00.000Z',
-          time_to: '2020-09-29T07:00:00.000Z',
-          event_type_id: 2,
-          linked_user_id: 3,
-          meeting_id: 1,
+//          date: new Date().toISOString(),
+          // time_from: '2020-09-29T06:00:00.000Z',
+          // time_to: '2020-09-29T07:00:00.000Z',
+//          event_type_id: 2,
+//          linked_user_id: 3,
+//          meeting_id: 1,
         },
         event: {},
         event_names: '',
@@ -86,7 +86,9 @@
       },
 
       'event.time_from': function (newVal) {
-        this.event.time_to = new Date(new Date(newVal).getTime() + this.duration * 60000).toISOString()
+        // console.log('newVal', newVal, newVal !== null)
+        if (newVal !== undefined && newVal !== null && newVal !== '')
+          this.event.time_to = new Date(new Date(newVal).getTime() + this.duration * 60000).toISOString()
       },
 
       'event.event_type_id': function (newVal) {
@@ -120,7 +122,15 @@
         this.meetings = JSON.parse(element.dataset.meetings)
         this.event_names = JSON.parse(element.dataset.eventtypes)
       }
-      this.fillEventData(null)
+      this.fillEventData({
+        id: null,
+        comment: '',
+        date: new Date().toISOString(),
+        time_from: '2020-09-29T06:00:00.000Z',
+        time_to: '2020-09-29T07:00:00.000Z',
+        event_type_id: 1
+
+      })
     },
 
     methods: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="write-in" @keydown.esc="onEsc">
+    <div class="write-in">
       <button class="v-btn v-btn--contained v-btn--rounded theme--dark v-size--default red ripple"
               @click="switchShow()">
         <span class="v-btn__content"></span>
@@ -8,7 +8,8 @@
         Записаться
       </button>
     </div>
-    <div class="v-overlay" v-show="showWriteInDialog" @click="overlayClick($event)">
+
+    <div class="v-overlay" v-show="showWriteInDialog">
       <div class="overlay-container"></div>
     </div>
 
@@ -22,43 +23,58 @@
             </div>
           </div>
 
-          <div class="table-wrap px-8 py-3">
-            <div class="row">
-              <div class="col">
-                <h3>1. Представьтесь, пожалуйста:</h3>
-                <div class="grid_short_label_name">
-                  <label for="name">ФИО:</label>
-                  <input type="text" v-model="name" id="name"/>
-                  <label for="phone">Номер телефона:</label>
-                  <input type="text" v-model="phone" id="phone"/>
-                  <label for="email">Е-mail:</label>
-                  <input type="text" v-model="email" id="email"/>
+          <div class="start-write-in" v-show="showStart">
+            <div class="table-wrap px-8 py-3">
+              <div class="row">
+                <div class="col">
+                  <h3>1. Представьтесь, пожалуйста:</h3>
+                  <div class="grid_short_label_name">
+                    <label for="name">ФИО:</label>
+                    <input type="text" v-model="name" id="name"/>
+                    <label for="phone">Номер телефона:</label>
+                    <input type="text" v-model="phone" id="phone"/>
+                    <label for="email">Е-mail:</label>
+                    <input type="text" v-model="email" id="email"/>
+                  </div>
+                </div>
+                <div class="col ml-8">
+                  <h3>2. Какая консультация Вам нужна?:</h3>
+                  <div class="grid_row">
+                    <Switcher v-model="event.individual" :labels="['Индивидуальная', 'Семейная']" width="120"/>
+                    <Switcher v-model="event.online" :labels="['Онлайн','Очно']" width="120"/>
+                  </div>
                 </div>
               </div>
-              <div class="col ml-8">
-                <h3>2. Какая консультация Вам нужна?:</h3>
-                <div class="grid_row">
-                  <Switcher v-model="event.individual" :labels="['Индивидуальная', 'Семейная']" width="120"/>
-                  <Switcher v-model="event.online" :labels="['Онлайн','Очно']" width="120"/>
-                </div>
-              </div>
-            </div>
 
-            <div class="row">
-              <div class="col">
-                <h3>3. Выберите дату и время: </h3>
-                <div class="grid_short_label_name">
-                  <label for="name">Дата и время:</label>
-                  <input type="text" id="date_time" readonly="readonly" :value="date_time"
-                         @click="showCalendar = true"/>
+              <div class="row">
+                <div class="col">
+                  <h3>3. Выберите дату и время: </h3>
+                  <div class="grid_short_label_name">
+                    <label for="name">Дата и время:</label>
+                    <input type="text" id="date_time" readonly="readonly" :value="date_time"
+                           @click="showCalendar = true"/>
+                    <label >Комментарий:</label>
+                    <textarea v-model="event.comment"/>
+                  </div>
+                </div>
+                <div class="col ml-8">
                 </div>
               </div>
-              <div class="col ml-8">
+              <div class="row flex-end mt-4">
+                <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click.prevent="doWrite()"
+                     :disabled="!formValid">Записаться
+                </div>
               </div>
             </div>
+          </div>
+
+          <div class="end-write-in" v-show="showEnd">
             <div class="row flex-end mt-4">
-              <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click.prevent="doWrite()"
-                   :disabled="!formValid">Записаться
+              <h3>Вы успешно записались</h3>
+              <h3>Хотите, чтобы Вам напомнили о сеансе?</h3>
+
+              <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click.prevent="doClose()">
+                Закрыть
               </div>
             </div>
           </div>
@@ -107,6 +123,8 @@
         month: [],
         availableDates: [],
         showWriteInDialog: false,
+        showStart: true,
+        showEnd: false,
         showCalendar: false,
         isGroup: false,
         isOnline: false,
@@ -129,31 +147,30 @@
       date_time() {
         if (this.event.date === '') return 'Нажмите здесь для выбора'
         let date = new Date(this.event.date).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})
-        let time = formatTime(new Date(this.event.time))
+        let time = this.formatTime(new Date(this.event.time))
         return `${date} в ${time}`
       }
     },
 
     updated() {
-      console.log('updated')
+      // console.log('updated')
       let valid = true
       if (this.name.length < 3) valid = false
       if (this.phone.length < 3) valid = false
       if (this.email.length < 3) valid = false
 
       this.formValid = valid
-      console.log('this.formValid', this.formValid)
+      // console.log('this.formValid', this.formValid)
     },
 
     created() {
-
       this.$root.$on('written', this.written)
 
       let element = document.getElementById('write-data')
       if (element !== null) {
         this.availableDates = JSON.parse(element.dataset.adates)
       }
-      console.log('this.availableDates', this.availableDates)
+      // console.log('this.availableDates', this.availableDates)
 
       let date = new Date()
       let startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
@@ -173,8 +190,8 @@
           })
 
           date.setDate(date.getDate() + 1)
-          if (a.length > 0)
-            console.log('dateToStr(date)', this.dateToStr(date), a)
+          // if (a.length > 0)
+          //   console.log('dateToStr(date)', this.dateToStr(date), a)
         }
 
         let that = this;
@@ -194,20 +211,16 @@
     },
 
     methods: {
-      onEsc() {
-        this.showWriteInDialog = false
-      },
-
-      overlayClick(e) {
-        console.log('overlayClick', e)
-      },
-
       switchShow() {
         this.showWriteInDialog = !this.showWriteInDialog
+        if (this.showWriteInDialog) {
+          this.showStart = true
+          this.showEnd = false
+        }
       },
 
       formatTime(str) {
-        return formatTime(str)
+        return this.$dt.formatTime(str)
       },
 
       dateToStr(date) {
@@ -220,8 +233,17 @@
         this.showCalendar = false
       },
 
-      written() {
-        this.showWriteInDialog = false;
+      doClose() {
+        this.showWriteInDialog = false
+      },
+
+      written(params) {
+        console.log('written params', params)
+        if (!params.success) {
+
+        }
+        this.showStart = false
+        this.showEnd = true
       },
 
       doWrite() {
