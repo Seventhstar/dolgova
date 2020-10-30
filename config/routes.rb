@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'contacts/index'
   get 'ajax/write_in'
   #devise_for :admin_users, ActiveAdmin::Devise.config
 

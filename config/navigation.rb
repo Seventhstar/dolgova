@@ -16,7 +16,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :about, 'План', schedule_index_path, html: {class: "#{li_class}"} if is_admin?
     primary.item :about, 'Обо мне', static_index_path, html: {class: "#{search_class} #{about_class} #{li_class}"}
     primary.item :posts, 'Блог', static_index_path, html: {class: "li_class"}, link_html: {class: "my_a_class"}
-    primary.item :contact, 'Контакты', static_index_path
+    primary.item :contact, 'Контакты', contacts_index_path
     #
     #
     #
