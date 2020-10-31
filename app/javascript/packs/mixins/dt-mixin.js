@@ -12,12 +12,14 @@ const DateTimeMixin = {
     return new Date(str).toString().slice(16, 21)
   },
 
-  formatDate() {
-
+  formatDate(date) {
+    return new Date(date).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long'})
+    //return this.dateToStr(date).split('-').reverse().join('.')
   },
 
   dateToStr(date) {
-    return date.toISOString().substring(0, 10)
+    let dt = new Date(date)
+    return dt.toISOString().substring(0, 10)
   },
 
   fillMonth(monthArray, dates = null) {
