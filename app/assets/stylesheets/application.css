@@ -76,6 +76,10 @@ button, input, optgroup, select, textarea {
     margin-bottom: 12px !important;
 }
 
+#write-in-modal .h3 {
+    color: #693d2c;
+}
+
 ul.no-mark {
     list-style: none;
     margin: 0;

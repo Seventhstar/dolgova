@@ -9,9 +9,9 @@
 
     <div class="event-list-container" v-show="currentTab === 0">
       <div class="day-navigation">
-        <span @click="goToDay(-1)">Предыдущий</span>
-        {{currentDayDescription}}
-        <span @click="goToDay(1)">Следующий</span>
+        <span @click="goToDay(-1)"> << Предыдущий</span>
+        <span class="day-title">{{currentDayDescription}}</span>
+        <span @click="goToDay(1)">Следующий >></span>
       </div>
 
       <DayEventsList :events="dayList" @showModal="onShowModal($event)"/>

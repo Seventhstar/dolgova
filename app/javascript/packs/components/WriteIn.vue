@@ -27,8 +27,8 @@
             <div class="table-wrap px-8 py-3">
               <div class="row">
                 <div class="col">
-                  <h3>1. Представьтесь, пожалуйста:</h3>
-                  <div class="grid_short_label_name">
+                  <div class="h3 mt-3">1. Представьтесь, пожалуйста:</div>
+                  <div class="grid_middle_label_name ml-3">
                     <label for="name">ФИО:</label>
                     <input type="text" v-model="name" id="name"/>
                     <label for="phone">Номер телефона:</label>
@@ -37,27 +37,27 @@
                     <input type="text" v-model="email" id="email"/>
                   </div>
                 </div>
-                <div class="col ml-8">
-                  <h3>2. Какая консультация Вам нужна?:</h3>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="h3 mt-6">2. Какая консультация Вам нужна?</div>
                   <div class="grid_row">
-                    <Switcher v-model="event.individual" :labels="['Индивидуальная', 'Семейная']" width="120"/>
-                    <Switcher v-model="event.online" :labels="['Онлайн','Очно']" width="120"/>
+                    <Switcher v-model="event.online" :labels="['Очно', 'Онлайн']" width="150"/>
+                    <Switcher v-model="event.individual" :labels="['Индивидуальная', 'Семейная']" width="150"/>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col">
-                  <h3>3. Выберите дату и время: </h3>
-                  <div class="grid_short_label_name">
+                  <div class="h3 mt-6">3. Выберите дату и время: </div>
+                  <div class="grid_middle_label_name  ml-3">
                     <label for="name">Дата и время:</label>
                     <input type="text" id="date_time" readonly="readonly" :value="date_time"
                            @click="showCalendar = true"/>
                     <label >Комментарий:</label>
                     <textarea v-model="event.comment"/>
                   </div>
-                </div>
-                <div class="col ml-8">
                 </div>
               </div>
               <div class="row flex-end mt-4">
@@ -137,7 +137,7 @@
         email: '',
         event: {
           individual: true,
-          online: true,
+          online: false,
           date: '',
           time: ''
         }
@@ -231,9 +231,6 @@
 </script>
 
 <style>
-  label {
-    font-size: 14px;
-  }
 
   .write-in-header {
     background-color: #b8999f;
@@ -257,6 +254,7 @@
   .calendar-popup .week-day {
     font-size: 18px;
     padding-bottom: 3px;
+    text-align: center;
   }
 
   .calendar-popup .week-days-grid {
@@ -265,19 +263,20 @@
   }
 
   .calendar-popup .month-day {
-    height: 70px;
-    margin: 1px 1px 0 0;
+    height: 138px;
+    margin: 1px;
   }
 
   .atime {
-    color: #b8999f;
-    margin: 1px;
-    padding: 1px 3px;
+    color: #381119;
+    margin: 0 18px;
+    padding: 0 12px;
     background-color: #f0eaee;
     border: 1px solid #cfc0c5;
     border-radius: 3px;
     cursor: pointer;
     float: left;
+    font-size: 22px;
   }
 
   .day {
@@ -286,5 +285,8 @@
     display: block;
     border-bottom: 1px solid #bbb;
     cursor: pointer;
+    font-size: 20px;
+    background-color: #cfc0c5;
+    color: #381119;
   }
 </style>

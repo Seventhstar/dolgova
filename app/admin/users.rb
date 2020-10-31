@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :email, :password, :name, :phone, :password_confirmation, :admin, :tarif_id, :actual
+  permit_params :email, :password, :name, :phone, :password_confirmation, :admin, :tarif_id, :actual, :shortname, :fullname
   menu label: "Пользователи"
 
   index do
@@ -7,6 +7,8 @@ ActiveAdmin.register User do
     id_column
     column :email
     column :name
+    column :shortname
+    column :fullname
     column :phone
     column :actual
     column :current_sign_in_at
@@ -25,6 +27,8 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :email
       f.input :name
+      f.input :shortname
+      f.input :fullname
       f.input :phone
       f.input :tarif, as: :select, collection: Tarif.all.map{|t| ["#{t.name} (#{t.amount})", t.id]}
       f.input :actual, as: :boolean

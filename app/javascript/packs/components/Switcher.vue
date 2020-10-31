@@ -1,13 +1,12 @@
 <template>
-  <div class="row" @click="isActive=!isActive">
-    <label :class="getClass(!isActive)" :style="style()">{{labels[0]}}:</label>
+  <div class="row switch-container" @click="isActive=!isActive">
+    <label :class="getClass(!isActive)" :style="style()">{{labels[0]}}</label>
     <div class="switcher_slot">
       <div class="switcher_controls" >
         <input aria-checked="true" id="input-74" role="switch"
                type="checkbox" aria-disabled="false" value="">
-        <!--        <div class="v-input&#45;&#45;selection-controls__ripple purple&#45;&#45;text"></div>-->
-        <div :class="{'switch_track text': true, 'active':isActive}"></div>
-        <div :class="{'switch_thumb text': true, active: isActive}"></div>
+        <div :class="{'switch_track text': true, 'active': isActive}"></div>
+        <div :class="{'switch_thumb text': true, 'active': isActive}"></div>
       </div>
     </div>
     <label :class="getClass(isActive)">{{labels[1]}}</label>
@@ -44,6 +43,9 @@
 
   .switcher_slot {
     cursor: pointer;
+  }
+  .switch-container label {
+    padding: 0 !important;
   }
 
   .switcher_slot input {
