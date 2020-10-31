@@ -9,6 +9,7 @@
 <script>
   export default {
     name: "ScheduleTabs",
+    props: ['value'],
     data() {
       return {
         currentTab: 0,
@@ -19,6 +20,12 @@
 
     created() {
       this.tabsValues.length = 0
+    },
+
+    watch: {
+      value: function(newVal, oldVal) {
+        if (this.currentTab !== newVal) this.currentTab = newVal
+      }
     },
 
     methods: {

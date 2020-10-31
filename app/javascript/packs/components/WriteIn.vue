@@ -109,6 +109,7 @@
 </template>
 
 <script>
+
   import http from "../mixins/rorHTTP";
   import Switcher from "./Switcher";
 
@@ -153,14 +154,12 @@
     },
 
     updated() {
-      // console.log('updated')
       let valid = true
       if (this.name.length < 3) valid = false
       if (this.phone.length < 3) valid = false
       if (this.email.length < 3) valid = false
 
       this.formValid = valid
-      // console.log('this.formValid', this.formValid)
     },
 
     created() {
@@ -170,44 +169,17 @@
       if (element !== null) {
         this.availableDates = JSON.parse(element.dataset.adates)
       }
-      // console.log('this.availableDates', this.availableDates)
+      this.$dt.fillMonth(this.month, this.availableDates)
 
-      let date = new Date()
-      let startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1)
-      let nextMonth = new Date(date.getFullYear(), date.getMonth() + 1, 1)
-      let startOfWeek = new Date(date.setDate(startOfMonth.getDate() - startOfMonth.getDay() + (startOfMonth.getDay() === 0 ? -6 : 1)))
-
-      this.month.length = 0
-      date = startOfWeek
-      while (date < nextMonth) {
-        for (let i = 0; i < 7; i++) {
-          let a = this.availableDates.filter(f => f.date === this.dateToStr(date))
-          this.month.push({
-            day: date.getDate(),
-            month: date.getMonth(),
-            year: date.getFullYear(),
-            adates: a
-          })
-
-          date.setDate(date.getDate() + 1)
-          // if (a.length > 0)
-          //   console.log('dateToStr(date)', this.dateToStr(date), a)
+      let that = this;
+      document.addEventListener('keyup', function (event) {
+        if (event.key === 'Escape') {
+          if (that.showCalendar)
+            that.showCalendar = false
+          else
+            that.showWriteInDialog = false
         }
-
-        let that = this;
-        document.addEventListener('keyup', function (event) {
-          if (event.key === 'Escape') {
-            if (that.showCalendar)
-              that.showCalendar = false
-            else
-              that.showWriteInDialog = false
-          }
-        });
-      }
-    },
-
-    mounted() {
-
+      });
     },
 
     methods: {
@@ -238,7 +210,6 @@
       },
 
       written(params) {
-        console.log('written params', params)
         if (!params.success) {
 
         }
@@ -279,8 +250,8 @@
   }
 
   .calendar-popup .week-day, .calendar-popup .month-day {
-    border: 1px solid #aaa;
-    text-align: center;
+    //border: 1px solid #aaa;
+
   }
 
   .calendar-popup .week-day {
@@ -295,6 +266,7 @@
 
   .calendar-popup .month-day {
     height: 70px;
+    margin: 1px 1px 0 0;
   }
 
   .atime {
@@ -313,5 +285,6 @@
     margin-bottom: 2px;
     display: block;
     border-bottom: 1px solid #bbb;
+    cursor: pointer;
   }
 </style>

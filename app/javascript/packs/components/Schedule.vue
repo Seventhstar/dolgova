@@ -8,7 +8,13 @@
     <EventForm v-model="currentEvent" @input="onInput($event)" v-show="showModal"/>
 
     <div class="event-list-container" v-show="currentTab === 0">
-      <DayEventsList :events="grouped[currentDay]" @showModal="onShowModal($event)"/>
+      <div class="day-navigation">
+        <span>Предыдущий</span>
+        {{currentDay}}
+        <span>Следующий</span>
+      </div>
+
+      <DayEventsList :events="dayList" @showModal="onShowModal($event)"/>
     </div>
 
     <div class="event-list-container" v-show="currentTab === 1">
@@ -27,6 +33,10 @@
           <div :class="{ 'today': day===today, 'schedule-date': true }">
             {{weekDays[index]}}
           </div>
+        </div>
+        <div class="month-day" v-for="(day, index) in month">
+          <span class="day" @click="goToDay(day)">{{day.day}}</span>
+          <DayEventsList :events="month[day.day]" @showModal="onShowModal($event)" type="week"/>
         </div>
       </div>
     </div>
@@ -51,6 +61,7 @@
 
         today: '',
         tomorrow: '',
+        month: [],
         week: [],
         weekDays: ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'],
 
@@ -70,6 +81,12 @@
         tabsValues: [],
         grouped: [],
         groupNames: []
+      }
+    },
+
+    computed: {
+      dayList() {
+        return this.grouped[this.currentDay]
       }
     },
 
@@ -99,6 +116,8 @@
         this.week.push(this.dateToStr(date))
       }
 
+      this.$dt.fillMonth(this.month)
+
       //console.log('week', startOfWeek, this.week, 'today', this.today)
       this.tabsValues.push(this.dateToStr(date))
       this.tabsValues.push(this.dateToStr(date))
@@ -126,7 +145,16 @@
 
         }
         this.updateGroups()
-        console.log('onInput', e)
+        // console.log('onInput', e)
+      },
+
+      goToDay(day) {
+        this.currentTab = 0
+        console.log('day', day)
+
+        let dt = `${day.year}-${day.month}-${day.day}`
+        this.$set(this, 'currentDay', dt)
+        // this.currentDay = day
       },
 
       onAdd() {
@@ -155,7 +183,7 @@
 
       sort(arr) {
         return arr.sort((a, b) =>
-           (a['time_from'] > b['time_from']) ? 1 : ((b['time_from'] > a['time_from']) ? -1 : 0)
+            (a['time_from'] > b['time_from']) ? 1 : ((b['time_from'] > a['time_from']) ? -1 : 0)
         )
       },
 

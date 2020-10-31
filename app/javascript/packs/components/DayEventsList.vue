@@ -48,7 +48,8 @@
       name(event) {
         switch (event.event_type_id) {
           case 1:
-            return 'Доступно для консультаций'
+            // TODO: переделать на текст из настроек
+            return 'Свободное время'
           case 4:
           case 2:
             return event.linked_user_name
