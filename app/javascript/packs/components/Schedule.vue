@@ -9,9 +9,9 @@
 
     <div class="event-list-container" v-show="currentTab === 0">
       <div class="day-navigation">
-        <span @click="goToDay(-1)"> << Предыдущий</span>
-        <span class="day-title">{{currentDayDescription}}</span>
-        <span @click="goToDay(1)">Следующий >></span>
+        <span @click="goToDay(-1)"><i class="icon icon-prev"/>Предыдущий</span>
+        <span class="day-title" @click="goToDay(0)">{{currentDayDescription}}</span>
+        <span @click="goToDay(1)">Следующий<i class="icon icon-next"/></span>
       </div>
 
       <DayEventsList :events="dayList" @showModal="onShowModal($event)"/>
@@ -36,7 +36,8 @@
         </div>
         <div class="month-day" v-for="(day, index) in month">
           <span class="day" @click="goToDay(day)">{{day.day}}</span>
-          <DayEventsList :events="grouped[`${day.year}-${day.month}-${day.day}`]" @showModal="onShowModal($event)" type="week"/>
+          <DayEventsList :events="grouped[`${day.year}-${day.month}-${day.day}`]" @showModal="onShowModal($event)"
+                         type="week"/>
         </div>
       </div>
     </div>
@@ -158,12 +159,16 @@
       },
 
       goToDay(day) {
+
         this.currentTab = 0
         let dt = new Date(this.currentDay)
         if (typeof (day) === "object") {
           dt = `${day.year}-${day.month}-${day.day}`
         } else {
-          dt.setDate(dt.getDate() + day)
+          if (day === 0)
+            dt = new Date(this.today)
+          else
+            dt.setDate(dt.getDate() + day)
           dt = this.dateToStr(dt)
         }
         //console.log('day', day, 'this.currentDay', this.currentDay, 'dt', dt)

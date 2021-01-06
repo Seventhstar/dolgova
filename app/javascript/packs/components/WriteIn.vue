@@ -41,26 +41,37 @@
               <div class="row">
                 <div class="col">
                   <div class="h3 mt-6">2. Какая консультация Вам нужна?</div>
-                  <div class="grid_row">
-                    <Switcher v-model="event.online" :labels="['Очно', 'Онлайн']" width="150"/>
-                    <Switcher v-model="event.individual" :labels="['Индивидуальная', 'Семейная']" width="150"/>
+                  <div class="row">
+                    <div class="col">
+                      <div class="grid_row">
+                        <Switcher v-model="event.online" :labels="['Очно', 'Онлайн']" width="150"/>
+                        <Switcher v-model="event.individual" :labels="['Семейная', 'Индивидуальная']" width="150"/>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="grid_short_label_name">
+                        <label for="phone" :disabled="!event.online">Связаться по:</label>
+                        <v-select v-model="format" :options="formats" :disabled="!event.online"/>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col">
-                  <div class="h3 mt-6">3. Выберите дату и время: </div>
+                  <div class="h3 mt-6">3. Выберите дату и время:</div>
                   <div class="grid_middle_label_name  ml-3">
                     <label for="name">Дата и время:</label>
                     <input type="text" id="date_time" readonly="readonly" :value="date_time"
                            @click="showCalendar = true"/>
-                    <label >Комментарий:</label>
+                    <label>Комментарий:</label>
                     <textarea v-model="event.comment"/>
                   </div>
                 </div>
               </div>
               <div class="row flex-end mt-4">
+                <span @click="onCancel()" class="btn btn_reset mr-2">Отменить</span>
                 <div class="add_task v-btn theme--dark v-size--default btn-active ripple" @click.prevent="doWrite()"
                      :disabled="!formValid">Записаться
                 </div>
@@ -135,6 +146,8 @@
         name: '',
         phone: '',
         email: '',
+        format: 0,
+        formats: [],
         event: {
           individual: true,
           online: false,
@@ -168,6 +181,7 @@
       let element = document.getElementById('write-data')
       if (element !== null) {
         this.availableDates = JSON.parse(element.dataset.adates)
+        this.formats = JSON.parse(element.dataset.formats)
       }
       this.$dt.fillMonth(this.month, this.availableDates)
 
@@ -244,11 +258,6 @@
     color: white;
     font-size: 24px;
     font-family: roboto, serif;
-  }
-
-  .calendar-popup .week-day, .calendar-popup .month-day {
-    //border: 1px solid #aaa;
-
   }
 
   .calendar-popup .week-day {

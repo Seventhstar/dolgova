@@ -50,3 +50,30 @@
     background-color: #eeeeee !important;
   }
 }
+
+.disabled, label[disabled='disabled'] {
+  color: #989898;
+  transition: .6s cubic-bezier(.25, .8, .5, 1);
+}
+
+input[disabled='disabled'] {
+  //background-color: #aaaaaa !important;
+}
+
+.vs--disabled .vs__clear, .vs--disabled .vs__dropdown-toggle,
+.vs--disabled .vs__open-indicator, .vs--disabled .vs__search, .vs--disabled .vs__selected {
+  background-color: #e8e8e8 !important;
+}
+
+#write-in-modal .vs__dropdown-toggle {
+  height: 36px !important;
+}
+
+#write-in-modal .vs__selected-options, #write-in-modal .vs1__listbox,
+#write-in-modal .vs__dropdown-option {
+  font-size: 16px !important;
+}
+
+#write-in-modal .vs__selected-options {
+  height: 34px;
+}

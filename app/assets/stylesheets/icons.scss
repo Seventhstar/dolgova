@@ -29,3 +29,17 @@
   color: #9c0505;
   background-color: transparent;
 }
+
+.icon-next {
+  background: asset-url("next.svg") no-repeat 0 0;
+  width: 30px;
+  height: 20px;
+  float: right;
+}
+
+.icon-prev {
+  background: asset-url("prev.svg") no-repeat 0 0;
+  width: 30px;
+  height: 20px;
+  float: left;
+}

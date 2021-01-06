@@ -1,10 +1,10 @@
 <template>
-  <div class="row switch-container" @click="isActive=!isActive">
+  <div class="row switch-container" @click="click()">
     <label :class="getClass(!isActive)" :style="style()">{{labels[0]}}</label>
     <div class="switcher_slot">
-      <div class="switcher_controls" >
-        <input aria-checked="true" id="input-74" role="switch"
-               type="checkbox" aria-disabled="false" value="">
+      <div class="switcher_controls">
+        <input role="switch"
+               type="checkbox" :value="isActive">
         <div :class="{'switch_track text': true, 'active': isActive}"></div>
         <div :class="{'switch_thumb text': true, 'active': isActive}"></div>
       </div>
@@ -15,14 +15,16 @@
 <script>
   export default {
     name: 'Switcher',
-    props: ['labels', 'width'],
+    props: ['labels', 'width', 'value'],
     data: function () {
       return {
         isActive: false,
       }
     },
 
-    computed: {},
+    created() {
+      this.isActive = this.value
+    },
 
     methods: {
       getClass(active) {
@@ -34,8 +36,12 @@
         if (this.width !== undefined)
           return `width: ${this.width}px`
         return ''
-      }
+      },
 
+      click() {
+        this.isActive = !this.isActive
+        this.$emit('input', this.isActive)
+      }
     }
   }
 </script>
@@ -44,6 +50,7 @@
   .switcher_slot {
     cursor: pointer;
   }
+
   .switch-container label {
     padding: 0 !important;
   }
@@ -104,11 +111,6 @@
   .switch_thumb.active {
     transform: translate(20px);
     background-color: #730E15;
-  }
-
-  .disabled {
-    color: #989898;
-    transition: .6s cubic-bezier(.25, .8, .5, 1);
   }
 
 </style>

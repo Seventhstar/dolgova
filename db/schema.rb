@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_125551) do
+ActiveRecord::Schema.define(version: 2020_11_05_111629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,7 +75,9 @@ ActiveRecord::Schema.define(version: 2020_10_31_125551) do
     t.integer "meeting_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "format_id"
     t.index ["event_type_id"], name: "index_events_on_event_type_id"
+    t.index ["format_id"], name: "index_events_on_format_id"
   end
 
   create_table "formats", force: :cascade do |t|
@@ -131,14 +133,18 @@ ActiveRecord::Schema.define(version: 2020_10_31_125551) do
     t.boolean "actual", default: true
     t.string "shortname"
     t.string "fullname"
+    t.bigint "format_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["format_id"], name: "index_users_on_format_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["tarif_id"], name: "index_users_on_tarif_id"
   end
 
   add_foreign_key "event_types", "state_colors"
   add_foreign_key "events", "event_types"
+  add_foreign_key "events", "formats"
   add_foreign_key "meetings", "durations"
   add_foreign_key "meetings", "formats"
+  add_foreign_key "users", "formats"
   add_foreign_key "users", "tarifs"
 end

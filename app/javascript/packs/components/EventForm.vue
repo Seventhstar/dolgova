@@ -2,8 +2,7 @@
   <div class="modal" id="myModal">
     <div class="modal-content">
       <div class="modal-head">{{eventName}}
-        <span @click="deleteEvent()" class="icon icon_remove right" title="Удалить">×</span>
-
+        <span @click="deleteEvent()" class="icon icon_remove right" title="Удалить" v-show="event.id!=null">×</span>
       </div>
       <div class="modal-body">
         <div class="grid_short_label_name">
@@ -26,7 +25,7 @@
           </div>
           <span>Вид события:</span>
           <v-select :options="event_names" :reduce="v=>v.value" v-model="event.event_type_id"></v-select>
-          <template v-if="[2, 4].includes(event.event_type_id)">
+          <template v-show="[2, 4].includes(event.event_type_id)">
             <span>Клиент:</span>
             <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id"></v-select>
             <span>Вид консультации:</span>
@@ -62,6 +61,7 @@
         time_from: '',
         all_weeks: false,
         duration: 60,
+        lastInserted: null,
         eventTemplate: {
           id: null,
           comment: '',
@@ -70,7 +70,7 @@
           // time_to: '2020-09-29T07:00:00.000Z',
 //          event_type_id: 2,
 //          linked_user_id: 3,
-//          meeting_id: 1,
+          //meeting_id: 1,
         },
         event: {},
         event_names: '',
@@ -82,19 +82,32 @@
 
     watch: {
       value: function (newVal) {
+//        console.log('this.lastInserted', this.lastInserted, 'newVal', newVal)
+//         if (newVal != null && newVal.time_from != null) {
+//           let dt = newVal
+//           dt.time_from = new Date(new Date(dt.time_from).getTime() + 60 * 60000).toISOString()
+//           this.fillEventData(dt)
+//         } else {
+//           this.fillEventData(null)
+//         }
         this.fillEventData(newVal)
       },
 
       'event.time_from': function (newVal) {
-        // console.log('newVal', newVal, newVal !== null)
+        console.log('newVal', newVal, newVal !== null)
         if (newVal !== undefined && newVal !== null && newVal !== '')
           this.event.time_to = new Date(new Date(newVal).getTime() + this.duration * 60000).toISOString()
       },
 
-      'event.event_type_id': function (newVal) {
+      'event.linked_user_id': function (oldVal, newVal) {
+        console.log('newVal != 2', newVal, newVal != 2)
+      },
+
+      'event.event_type_id': function (newVal, oldVal) {
+        console.log('newVal', newVal, 'oldVal', oldVal, newVal != 2)
         if (newVal != 2) {
-          this.event.meeting_id = null
-          this.event.linked_user_id = null
+          // this.event.meeting_id = null
+          // this.event.linked_user_id = null
         }
       }
 
@@ -122,6 +135,7 @@
         this.meetings = JSON.parse(element.dataset.meetings)
         this.event_names = JSON.parse(element.dataset.eventtypes)
       }
+
       this.fillEventData({
         id: null,
         comment: '',
@@ -129,13 +143,20 @@
         time_from: '2020-09-29T06:00:00.000Z',
         time_to: '2020-09-29T07:00:00.000Z',
         event_type_id: 1
-
       })
     },
 
     methods: {
       fillEventData(newVal) {
-        let eventData = newVal === null ? this.eventTemplate : newVal
+        let eventData = newVal
+        if (newVal === null) {
+          eventData = this.eventTemplate
+          if (this.lastInserted !== null) {
+            let time = new Date(this.lastInserted).getTime()
+            eventData.time_from = new Date(time + 60 * 60000).toISOString()
+            eventData.time_to = new Date(time + 120 * 60000).toISOString()
+          }
+        }
         for (let i in eventData) {
           this.$set(this.event, i, eventData[i])
         }
@@ -179,6 +200,7 @@
             t.showError(t, error)
           })
         } else {
+          this.lastInserted = this.event.time_from
           axios.post(`/events`, {
             format: 'json',
             event: this.event

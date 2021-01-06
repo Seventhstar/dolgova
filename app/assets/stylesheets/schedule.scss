@@ -44,15 +44,17 @@
 }
 
 .vdatetime.time input {
-  width: 36px;
+  width: 50px;
+  height: 26px;
+  padding: 2px 6px;
 }
 
 .schedule-date {
   color: white;
   background-color: #cfc0c5;
   text-align: center;
-  border-radius: 8px;
-  padding: 5px;
+  border-radius: 4px;
+  padding: 2px;
   font-size: 16px;
   font-weight: bold;
 
@@ -73,7 +75,6 @@
 .day-navigation span, #schedule-tabs span {
   background-color: #cfc0c5;
   color: white;
-  border-radius: 3px;
   font-family: Roboto, sans-serif;
   text-transform: uppercase;
   text-decoration: none;
@@ -82,9 +83,18 @@
   font-weight: 500;
   text-indent: 0.1em;
   text-align: center;
-  display: inherit;
   align-items: center;
   height: inherit;
   cursor: pointer;
   padding: 4px;
+
+  &:hover {
+    background-color: #af8c93;
+  }
+}
+
+#schedule-tabs span {
+  display: inherit;
+  border-radius: 3px;
+  font-size: 1rem;
 }
