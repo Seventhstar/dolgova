@@ -2,7 +2,7 @@
   <div class="modal" id="myModal">
     <div class="modal-content">
       <div class="modal-head">{{eventName}}
-        <span @click="deleteEvent()" class="icon icon_remove right" title="Удалить" v-show="event.id!=null">×</span>
+        <span @click="deleteEvent()" class="icon icon_remove right" title="Удалить" v-show="event.id!=null"></span>
       </div>
       <div class="modal-body">
         <div class="grid_short_label_name">
@@ -23,14 +23,16 @@
             <span :class="'duration'+[duration===60? ' active': '']" @click="setDuration(60)">1ч</span>
             <span :class="'duration'+[duration===90? ' active': '']" @click="setDuration(90)">1.5ч</span>
           </div>
+
           <span>Вид события:</span>
           <v-select :options="event_names" :reduce="v=>v.value" v-model="event.event_type_id"></v-select>
-          <template v-show="[2, 4].includes(event.event_type_id)">
-            <span>Клиент:</span>
-            <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id"></v-select>
-            <span>Вид консультации:</span>
-            <v-select :options="meetings" :reduce="v=>v.value" v-model="event.meeting_id"></v-select>
+          <template v-show="clientIsVisible">
+            <span v-show="clientIsVisible">Клиент:</span>
+            <v-select :options="users" :reduce="v=>v.value" v-model="event.linked_user_id" v-show="clientIsVisible"></v-select>
+            <span v-show="clientIsVisible">Вид консультации:</span>
+            <v-select :options="meetings" :reduce="v=>v.value" v-model="event.meeting_id" v-show="clientIsVisible"></v-select>
           </template>
+
           <span>Комментарий:</span>
           <textarea v-model="event.comment">
           </textarea>
@@ -62,17 +64,16 @@
         all_weeks: false,
         duration: 60,
         lastInserted: null,
+        minutesBetween: 10,
         eventTemplate: {
           id: null,
           comment: '',
-//          date: new Date().toISOString(),
-          // time_from: '2020-09-29T06:00:00.000Z',
-          // time_to: '2020-09-29T07:00:00.000Z',
-//          event_type_id: 2,
-//          linked_user_id: 3,
-          //meeting_id: 1,
+          date: new Date().toISOString(),
+          time_from: '2020-09-29T06:00:00.000Z',
+          time_to: '2020-09-29T07:00:00.000Z',
+          event_type_id: 1
         },
-        event: {},
+        event: {event_type_id: 1},
         event_names: '',
         meetings: '',
         users: '',
@@ -82,19 +83,10 @@
 
     watch: {
       value: function (newVal) {
-//        console.log('this.lastInserted', this.lastInserted, 'newVal', newVal)
-//         if (newVal != null && newVal.time_from != null) {
-//           let dt = newVal
-//           dt.time_from = new Date(new Date(dt.time_from).getTime() + 60 * 60000).toISOString()
-//           this.fillEventData(dt)
-//         } else {
-//           this.fillEventData(null)
-//         }
         this.fillEventData(newVal)
       },
 
       'event.time_from': function (newVal) {
-        console.log('newVal', newVal, newVal !== null)
         if (newVal !== undefined && newVal !== null && newVal !== '')
           this.event.time_to = new Date(new Date(newVal).getTime() + this.duration * 60000).toISOString()
       },
@@ -104,8 +96,8 @@
       },
 
       'event.event_type_id': function (newVal, oldVal) {
-        console.log('newVal', newVal, 'oldVal', oldVal, newVal != 2)
-        if (newVal != 2) {
+        console.log('newVal', newVal, 'oldVal', oldVal, newVal !== 2)
+        if (newVal !== 2) {
           // this.event.meeting_id = null
           // this.event.linked_user_id = null
         }
@@ -116,7 +108,13 @@
     computed: {
       eventName() {
         return this.event['id'] == null ? 'Новое событие' : 'Редактирование'
+      },
+
+      clientIsVisible() {
+        return this.event.event_type_id === 2 || this.event.event_type_id === 4
       }
+
+
     },
 
     mounted() {
@@ -134,34 +132,44 @@
         this.users = JSON.parse(element.dataset.users)
         this.meetings = JSON.parse(element.dataset.meetings)
         this.event_names = JSON.parse(element.dataset.eventtypes)
+        this.minutesBetween = element.dataset.minutesBetween
       }
 
-      this.fillEventData({
-        id: null,
-        comment: '',
-        date: new Date().toISOString(),
-        time_from: '2020-09-29T06:00:00.000Z',
-        time_to: '2020-09-29T07:00:00.000Z',
-        event_type_id: 1
-      })
+      this.fillEventData(this.eventTemplate)
     },
 
     methods: {
       fillEventData(newVal) {
         let eventData = newVal
-        if (newVal === null) {
+
+        if (newVal === undefined || newVal === null) {
           eventData = this.eventTemplate
+        } else if (newVal.time_from !== undefined) {
+          eventData = newVal
+        } else if (newVal.data !== undefined) {
+          eventData = newVal.data
+        } else {
+          eventData = this.eventTemplate
+        }
+
+        let duration = Math.abs(new Date(eventData.time_to) - new Date(eventData.time_from)) / 60000
+        if (duration < 60 || duration > 120) duration = 60
+
+        // console.log('this.duration', duration, 'eventData.time_to', eventData.time_to, 'eventData.time_from', eventData.time_from)
+        // console.log('eventData', eventData)
+        let time = new Date(this.lastInserted).getTime()
+
+        if (newVal === null) {
           if (this.lastInserted !== null) {
-            let time = new Date(this.lastInserted).getTime()
-            eventData.time_from = new Date(time + 60 * 60000).toISOString()
-            eventData.time_to = new Date(time + 120 * 60000).toISOString()
+            eventData.time_from = new Date(time + this.minutesBetween * 60000).toISOString() //- currentTimeZoneOffsetInHours
           }
         }
+
         for (let i in eventData) {
           this.$set(this.event, i, eventData[i])
         }
-
-        this.duration = Math.abs(new Date(this.event.time_to) - new Date(this.event.time_from)) / 60000
+        this.setDuration(duration)
+        this.duration = duration
       },
 
       setDuration(minutes) {
@@ -200,15 +208,17 @@
             t.showError(t, error)
           })
         } else {
-          this.lastInserted = this.event.time_from
           axios.post(`/events`, {
             format: 'json',
             event: this.event
           }).then(function (response) {
             t.$emit('input', {update: false, data: response.data})
+            console.log('t.event.time_from', t.event.time_from, 'response.data.time_to', response.data.time_to)
+            t.lastInserted = response.data.time_to
           }).catch(function (error) {
             t.showError(t, error)
           })
+
         }
       },
 

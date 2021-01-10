@@ -4,6 +4,10 @@
   margin-top: 7px
 }
 
+.event-row-month .event_icon {
+  margin-top: 3px;
+}
+
 .event-row {
   display: grid;
   background-color: white;
@@ -25,24 +29,32 @@
   }
 }
 
-.event-row-week {
+.event-row-week, .event-row-month {
   background-color: white;
   font-size: 12px;
   align-content: center;
-  margin: 4px 0;
-  padding: 3px;
-  border-radius: 4px;
 
   .event-list-item {
     display: grid;
-    //grid-template-columns: 28px 6px 1fr 50px 12px;
     grid-template-columns: 32px 1fr 12px;
+    padding: 0 3px;
   }
-
   .second_row {
     font-size: 10px;
     color: gray;
   }
+}
+
+.event-row-week {
+  margin: 4px 0;
+  padding: 3px;
+  border-radius: 4px;
+}
+
+.event-row-month {
+  margin: 2px 0;
+  padding: 0;
+  border-radius: 0;
 }
 
 .color-column {

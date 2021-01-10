@@ -1,6 +1,6 @@
 <template>
   <div class="event-list">
-    <div :class="'event-row'+[type==='week' ? '-week': '']"
+    <div :class="rowClass(type)"
          :style="{ 'background-color': event.color }"
          v-for="event in events" @dblclick="editEvent(event)">
       <div class="event-list-item">
@@ -11,9 +11,10 @@
         <span v-if="type===undefined">баланс</span>
         <event-icon :event="event" :show="type!==undefined"></event-icon>
 
-        <span class="second_row">{{formatTime(event.time_to)}}</span>
+        <span class="second_row" v-if="type!='month'">{{formatTime(event.time_to)}}</span>
         <span :style="{ 'background-color': '#'+event.color }" class="color-column" v-if="type===undefined"></span>
-        <span class="second_row">{{event.linked_user_phone}}</span>
+
+        <span class="second_row" v-if="type!='month'">{{event.linked_user_phone}}</span>
         <span class="second_row" v-if="type===undefined">{{event.comment}}</span>
         <span class="second_row" v-if="type===undefined">{{event.tarif_info}}</span>
       </div>
@@ -45,6 +46,12 @@
     },
 
     methods: {
+      rowClass(type) {
+        let cls = 'event-row'
+        if (type === 'week' || type === 'month') cls += '-'+type
+        return cls
+      },
+
       name(event) {
         switch (event.event_type_id) {
           case 1:

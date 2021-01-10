@@ -6,11 +6,10 @@
   float: left;
 }
 
-.event-row-week .sofa{
+.event-row-week .sofa, .event-row-month .sofa, {
   background: asset-url("sofa-12.png") no-repeat 0 0;
   width: 12px;
   height: 12px;
-
 }
 
 .online {
@@ -27,7 +26,9 @@
   font-size: 28px;
   line-height: 1;
   color: #9c0505;
-  background-color: transparent;
+  background: asset-url("trash.png") no-repeat 0 0;
+  height: 16px;
+  width: 16px;
 }
 
 .icon-next {

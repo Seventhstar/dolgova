@@ -34,10 +34,9 @@
             {{weekDays[index]}}
           </div>
         </div>
-        <div class="month-day" v-for="(day, index) in month">
-          <span class="day" @click="goToDay(day)">{{day.day}}</span>
-          <DayEventsList :events="grouped[`${day.year}-${day.month}-${day.day}`]" @showModal="onShowModal($event)"
-                         type="week"/>
+        <div :class="dayClass(day, 'month-day')" v-for="(day, index) in month">
+          <span :class="dayClass(day)" @click="goToDay(day)">{{day.day}}</span>
+          <DayEventsList :events="grouped[dateToStr(day)]" @showModal="onShowModal($event)" type="month"/>
         </div>
       </div>
     </div>
@@ -73,6 +72,7 @@
         currentTab: 0,
 
         currentDay: null,
+        currentMonth: null,
 
         sets_names: [],
         parents: [],
@@ -108,8 +108,10 @@
       this.updateGroups()
 
       let date = new Date()
+      this.currentMonth = date.getMonth()+1
       this.today = this.dateToStr(date)
       this.currentDay = this.today
+
       date.setDate(date.getDate() + 1)
       this.tomorrow = this.dateToStr(date)
       date = new Date()
@@ -134,6 +136,12 @@
     },
 
     methods: {
+      dayClass(day, c = "day") {
+        let cls = c
+        if (this.currentMonth !== day.month) cls += " nonactual"
+        return cls
+      },
+
       onInput(e) {
         this.showModal = false
         if (e === undefined) return
@@ -152,10 +160,8 @@
             let i = this.events.indexOf(forUpdate[0])
             this.$set(this.events, i, e.data)
           }
-
         }
         this.updateGroups()
-        // console.log('onInput', e)
       },
 
       goToDay(day) {
@@ -163,7 +169,7 @@
         this.currentTab = 0
         let dt = new Date(this.currentDay)
         if (typeof (day) === "object") {
-          dt = `${day.year}-${day.month}-${day.day}`
+          dt = this.dateToStr(new Date(day.year, day.month - 1, day.day + 1))
         } else {
           if (day === 0)
             dt = new Date(this.today)
@@ -171,7 +177,7 @@
             dt.setDate(dt.getDate() + day)
           dt = this.dateToStr(dt)
         }
-        //console.log('day', day, 'this.currentDay', this.currentDay, 'dt', dt)
+        //console.log('day', day, 'this.currentDay', this.currentDay, 'dt', dt, new Date(day.year, day.month, day.day))
         this.$set(this, 'currentDay', dt)
         this.currentDay = dt
       },
@@ -211,7 +217,12 @@
       },
 
       dateToStr(date) {
-        return date.toISOString().substring(0, 10)
+        let d = date
+        if (typeof d.getMonth !== 'function') {
+          d = new Date(d.year, d.month-1, d.day+1)
+        }
+        //console.log('dateToStr(date)', date, typeof date.getMonth !== 'function', d.toISOString().substring(0, 10))
+        return d.toISOString().substring(0, 10)
       }
 
     },

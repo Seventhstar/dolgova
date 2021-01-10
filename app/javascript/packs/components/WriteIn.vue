@@ -246,56 +246,5 @@
 
 <style>
 
-  .write-in-header {
-    background-color: #b8999f;
-    padding: 10px;
-    border-radius: 4px 4px 0 0;
-  }
 
-  .write-in-title {
-    text-align: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-    font-family: roboto, serif;
-  }
-
-  .calendar-popup .week-day {
-    font-size: 18px;
-    padding-bottom: 3px;
-    text-align: center;
-  }
-
-  .calendar-popup .week-days-grid {
-    align-items: center;
-    grid-gap: 0;
-  }
-
-  .calendar-popup .month-day {
-    height: 138px;
-    margin: 1px;
-  }
-
-  .atime {
-    color: #381119;
-    margin: 0 18px;
-    padding: 0 12px;
-    background-color: #f0eaee;
-    border: 1px solid #cfc0c5;
-    border-radius: 3px;
-    cursor: pointer;
-    float: left;
-    font-size: 22px;
-  }
-
-  .day {
-    width: 100%;
-    margin-bottom: 2px;
-    display: block;
-    border-bottom: 1px solid #bbb;
-    cursor: pointer;
-    font-size: 20px;
-    background-color: #cfc0c5;
-    color: #381119;
-  }
 </style>

@@ -24,6 +24,11 @@ if EventType.count == 0
                        {name: 'Консультация'},
                        {name: 'Личное дело'}])
 end
+
+if Setting.count == 0
+   Setting.create({key: 'minutes_between', name: 'Минут между консультациями', value: 15})
+end
+
 #
 #if Duration.count == 0
 #  Duration.create!([{name: '1ч', minutes: '60'},

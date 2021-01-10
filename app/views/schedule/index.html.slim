@@ -1,8 +1,9 @@
 = javascript_pack_tag 'application'
 = javascript_pack_tag 'schedule'
 = content_tag :div, id: 'event-data',
-        data: {eventTypes: for_js(EventType.all),
-                users: for_js(User.only_actual),
+        data: { minutes_between: Setting.find_by_key(:minutes_between).value,
+                eventTypes: for_js(EventType.all),
+                users: for_js(User.only_actual),                
                 meetings: for_js(Meeting.all),
                 events: for_vue(Event.order([:date, :time_from ]), [:linked_user_name,
                         :linked_user_phone,
